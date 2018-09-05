@@ -1,5 +1,5 @@
 <template lang="html">
-  <DataTable endpoint='/categories' :config='config'/>
+  <DataTable endpoint='/items' :config='config'/>
 </template>
 
 <script>
@@ -12,11 +12,13 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'actions'],
+        columns: ['name', 'description', 'available', 'registry', 'actions'],
         options: {
           headings: {
             name: 'Nome',
             description: 'Descrição',
+            available: 'Disponível',
+            registry: 'Tombo',
             actions: ''
           }
         }

@@ -4,7 +4,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/categorias">Categorias</router-link> |
-      <router-link to="/form">Formulário</router-link>
+      <router-link to="/itens">Itens</router-link> |
+      <router-link to="/terceiros">Terceiros</router-link> |
+      <router-link to="/usuarios">Usuários</router-link> |
+      <router-link to="/emprestimos">Empréstimos</router-link> |
+      <router-link to="/reservas">Reservas</router-link>
     </div>
     <router-view/>
   </div>

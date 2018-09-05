@@ -26,9 +26,29 @@ export default new Router({
       component: () => import('./views/Category.vue')
     },
     {
-      path: '/form',
-      name: 'form',
-      component: () => import('./components/forms/CategoryForm.vue')
+      path: '/itens',
+      name: 'item',
+      component: () => import('./views/Item.vue')
+    },
+    {
+      path: '/terceiros',
+      name: 'thirdparty',
+      component: () => import('./views/Thirdparty.vue')
+    },
+    {
+      path: '/usuarios',
+      name: 'user',
+      component: () => import('./views/User.vue')
+    },
+    {
+      path: '/emprestimos',
+      name: 'lending',
+      component: () => import('./views/Lending.vue')
+    },
+    {
+      path: '/reservas',
+      name: 'reservation',
+      component: () => import('./views/Reservation.vue')
     }
   ]
 })

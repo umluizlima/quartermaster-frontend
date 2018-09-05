@@ -6,7 +6,12 @@
              slot="beforeTable"
              variant="success">Adicionar</b-btn> -->
 
-      <b-btn-group class="actions" slot="actions" slot-scope="props">
+      <div v-for="b in bools" :slot="b.column" slot-scope="props">
+        <p v-if="props.row[b.column]">{{ b.isTrue }}</p>
+        <p v-else>{{ b.isFalse }}</p>
+      </div>
+
+      <b-btn-group slot="actions" slot-scope="props">
         <b-btn variant="warning">Editar {{ props.row.id }}</b-btn>
         <b-btn variant="danger">Apagar</b-btn>
         <!-- <b-btn v-b-modal.updateModal
@@ -36,9 +41,6 @@
 import API from '@/utils/api'
 
 const conf = {
-  headings: {
-    actions: ''
-  },
   perPage: 5,
   perPageValues: [5, 10, 25],
   texts: {
@@ -56,8 +58,9 @@ export default {
     return {
       api: new API(this.endpoint),
       data: [],
-      options: Object.assign(this.config.options, conf),
-      columns: this.config.columns.concat(['actions'])
+      options: {},
+      columns: [],
+      bools: this.config.bools || []
     }
   },
   props: {
@@ -75,11 +78,28 @@ export default {
       this.data = []
       this.api.get()
         .then((resp) => {
+          this.getForeignData(resp.data, this.config.foreign_keys)
           this.data = resp.data
         })
+    },
+    getForeignData (data = [], foreign_keys = []) {
+      for (let key of foreign_keys) {
+        var api = new API(key.endpoint)
+        api.get()
+          .then((resp) => {
+            for (let row of data) {
+              if (row[key.column] != undefined) {
+                row[key.column] = resp.data.find(x => x.id === row[key.column])[key.attribute]
+              }
+            }
+          })
+      }
     }
   },
   mounted () {
+    this.columns = this.config.columns.concat(['actions'])
+    this.config.options.headings.actions = ''
+    this.options = Object.assign(this.config.options, conf)
     this.getData()
   }
 }

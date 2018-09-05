@@ -33,13 +33,12 @@ export default {
   props: {
     obj: {
       type: Object,
-      default: {},
       required: true
     }
   },
   methods: {
     onSubmit () {
-      this.$emit("submitted", this.form)
+      this.$emit('submitted', this.form)
     },
     clear () {
       this.form.name = null

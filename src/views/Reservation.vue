@@ -22,7 +22,19 @@ export default {
             user_id: 'Usuário',
             thirdparty_id: 'Terceiro'
           }
-        }
+        },
+        foreign_keys: [
+        {
+            column: 'user_id',
+            endpoint: '/users',
+            attribute: 'email'
+          },
+          {
+            column: 'thirdparty_id',
+            endpoint: '/thirdparties',
+            attribute: 'email'
+          }
+        ]
       }
     }
   }

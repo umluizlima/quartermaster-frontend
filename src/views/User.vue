@@ -12,15 +12,14 @@ export default {
   data () {
     return {
       config: {
-        columns: ['first_name', 'last_name', 'email', 'admin', 'token', 'actions'],
+        columns: ['first_name', 'last_name', 'email', 'admin', 'token'],
         options: {
           headings: {
             first_name: 'Nome',
             last_name: 'Sobrenome',
             email: 'E-mail',
             admin: 'Admin?',
-            token: 'Token',
-            actions: ''
+            token: 'Token'
           }
         }
       }

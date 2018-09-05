@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="">
-    <v-client-table :data="data" :columns="config.columns" :options="config.options">
+    <v-client-table :data="data" :columns="columns" :options="options">
       <b-btn slot="beforeTable" variant="success">Adicionar</b-btn>
       <!-- <b-btn v-b-modal.createModal
              slot="beforeTable"
              variant="success">Adicionar</b-btn> -->
 
       <b-btn-group class="actions" slot="actions" slot-scope="props">
-        <b-btn variant="warning">Editar</b-btn>
+        <b-btn variant="warning">Editar {{ props.row.id }}</b-btn>
         <b-btn variant="danger">Apagar</b-btn>
         <!-- <b-btn v-b-modal.updateModal
                variant="warning"
@@ -35,12 +35,29 @@
 <script>
 import API from '@/utils/api'
 
+const conf = {
+  headings: {
+    actions: ''
+  },
+  perPage: 5,
+  perPageValues: [5, 10, 25],
+  texts: {
+    count: 'De {from} até {to} dos {count} resultados|{count} resultados|1 resultado',
+    filter: 'Pesquisar:',
+    filterPlaceholder: 'Pesquisar...',
+    limit: 'Resultados por página:',
+    noResults: 'Sem resultados...'
+  }
+}
+
 export default {
   name: 'DataTable',
   data () {
     return {
       api: new API(this.endpoint),
-      data: []
+      data: [],
+      options: Object.assign(this.config.options, conf),
+      columns: this.config.columns.concat(['actions'])
     }
   },
   props: {

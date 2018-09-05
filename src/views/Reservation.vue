@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'date_start', 'date_end', 'user_id', 'thirdparty_id', 'actions'],
+        columns: ['name', 'description', 'date_start', 'date_end', 'user_id', 'thirdparty_id'],
         options: {
           headings: {
             name: 'Nome',
@@ -20,8 +20,7 @@ export default {
             date_start: 'Início',
             date_end: 'Fim',
             user_id: 'Usuário',
-            thirdparty_id: 'Terceiro',
-            actions: ''
+            thirdparty_id: 'Terceiro'
           }
         }
       }

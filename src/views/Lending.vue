@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       config: {
-        columns: ['item_id', 'date_start', 'date_end', 'date_return', 'user_id', 'thirdparty_id', 'actions'],
+        columns: ['item_id', 'date_start', 'date_end', 'date_return', 'user_id', 'thirdparty_id'],
         options: {
           headings: {
             item_id: 'Item',
@@ -20,8 +20,7 @@ export default {
             date_end: 'Fim',
             date_return: 'Devolução',
             user_id: 'Usuário',
-            thirdparty_id: 'Terceiro',
-            actions: ''
+            thirdparty_id: 'Terceiro'
           }
         }
       }

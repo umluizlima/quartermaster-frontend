@@ -12,12 +12,11 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'actions'],
+        columns: ['name', 'description'],
         options: {
           headings: {
             name: 'Nome',
-            description: 'Descrição',
-            actions: ''
+            description: 'Descrição'
           }
         }
       }

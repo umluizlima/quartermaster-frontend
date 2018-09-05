@@ -12,14 +12,13 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'available', 'registry', 'actions'],
+        columns: ['name', 'description', 'available', 'registry'],
         options: {
           headings: {
             name: 'Nome',
             description: 'Descrição',
             available: 'Disponível',
-            registry: 'Tombo',
-            actions: ''
+            registry: 'Tombo'
           }
         }
       }

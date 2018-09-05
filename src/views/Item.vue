@@ -12,15 +12,30 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'available', 'registry'],
+        columns: ['name', 'description', 'category_id', 'available', 'registry'],
         options: {
           headings: {
             name: 'Nome',
             description: 'Descrição',
-            available: 'Disponível',
+            category_id: 'Categoria',
+            available: 'Status',
             registry: 'Tombo'
           }
-        }
+        },
+        foreign_keys: [
+          {
+            column: 'category_id',
+            endpoint: '/categories',
+            attribute: 'name'
+          }
+        ],
+        bools: [
+          {
+            column: 'available',
+            isTrue: 'Disponível',
+            isFalse: 'Indisponível'
+          }
+        ]
       }
     }
   }

@@ -12,16 +12,22 @@ export default {
   data () {
     return {
       config: {
-        columns: ['first_name', 'last_name', 'email', 'admin', 'token'],
+        columns: ['first_name', 'last_name', 'email', 'admin'],
         options: {
           headings: {
             first_name: 'Nome',
             last_name: 'Sobrenome',
             email: 'E-mail',
-            admin: 'Admin?',
-            token: 'Token'
+            admin: 'Função'
           }
-        }
+        },
+        bools: [
+          {
+            column: 'admin',
+            isTrue: 'Administrador',
+            isFalse: 'Usuário'
+          }
+        ]
       }
     }
   }

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
     <v-client-table :data="data" :columns="columns" :options="options">
-      <b-btn slot="beforeTable" variant="success">Adicionar</b-btn>
+      <!-- <b-btn slot="beforeTable" variant="success" @click="createObject()">Adicionar</b-btn> -->
       <!-- <b-btn v-b-modal.createModal
              slot="beforeTable"
              variant="success">Adicionar</b-btn> -->
@@ -12,8 +12,9 @@
       </div>
 
       <b-btn-group slot="actions" slot-scope="props">
-        <b-btn variant="warning">Editar {{ props.row.id }}</b-btn>
-        <b-btn variant="danger">Apagar</b-btn>
+        <!-- <b-btn variant="warning" @click="editObject(props.row.id)">Editar {{ props.row.id }}</b-btn> -->
+        <b-btn variant="danger" v-b-modal.deleteModal @click="objectId = props.row.id">Apagar {{ props.row.id }}</b-btn>
+        <!-- <DeleteModal :id="props.row.id" :api="api"/> -->
         <!-- <b-btn v-b-modal.updateModal
                variant="warning"
                @click.prevent="objectId = props.row.id">Editar</b-btn>
@@ -29,16 +30,17 @@
 
     <UpdateModal :id="objectId"
                  :api="api"
-                 @ok="getData"/>
+                 @ok="getData"/> -->
 
     <DeleteModal :id="objectId"
                  :api="api"
-                 @ok="getData"/> -->
+                 @ok="getData"/>
   </div>
 </template>
 
 <script>
 import API from '@/utils/api'
+import DeleteModal from '@/components/modals/DeleteModal.vue'
 
 const conf = {
   perPage: 5,
@@ -60,7 +62,8 @@ export default {
       data: [],
       options: {},
       columns: [],
-      bools: this.config.bools || []
+      bools: this.config.bools || [],
+      objectId: 0
     }
   },
   props: {
@@ -73,6 +76,9 @@ export default {
       required: true
     }
   },
+  components: {
+    DeleteModal,
+  },
   methods: {
     getData () {
       this.data = []
@@ -82,8 +88,8 @@ export default {
           this.data = resp.data
         })
     },
-    getForeignData (data = [], foreign_keys = []) {
-      for (let key of foreign_keys) {
+    getForeignData (data = [], foreignKeys = []) {
+      for (let key of foreignKeys) {
         var api = new API(key.endpoint)
         api.get()
           .then((resp) => {
@@ -101,6 +107,9 @@ export default {
     this.config.options.headings.actions = ''
     this.options = Object.assign(this.config.options, conf)
     this.getData()
+  },
+  updated () {
+    console.log(`objectId atual ${this.objectId}`)
   }
 }
 </script>

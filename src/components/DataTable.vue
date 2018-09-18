@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="">
     <v-client-table :data="data" :columns="columns" :options="options">
-      <!-- <b-btn slot="beforeTable" variant="success" @click="createObject()">Adicionar</b-btn> -->
+      <b-btn slot="beforeTable"
+             variant="success"
+             v-b-modal.createModal>Adicionar</b-btn>
       <!-- <b-btn v-b-modal.createModal
              slot="beforeTable"
              variant="success">Adicionar</b-btn> -->
@@ -13,7 +15,9 @@
 
       <b-btn-group slot="actions" slot-scope="props">
         <!-- <b-btn variant="warning" @click="editObject(props.row.id)">Editar {{ props.row.id }}</b-btn> -->
-        <b-btn variant="danger" v-b-modal.deleteModal @click="objectId = props.row.id">Apagar {{ props.row.id }}</b-btn>
+        <b-btn variant="danger"
+               v-b-modal.deleteModal
+               @click="objectId = props.row.id">Apagar</b-btn>
         <!-- <DeleteModal :id="props.row.id" :api="api"/> -->
         <!-- <b-btn v-b-modal.updateModal
                variant="warning"
@@ -25,10 +29,10 @@
       </b-btn-group>
     </v-client-table>
 
-    <!-- <CreateModal :api="api"
+    <CreateModal :api="api"
                  @ok="getData"/>
 
-    <UpdateModal :id="objectId"
+    <!-- <UpdateModal :id="objectId"
                  :api="api"
                  @ok="getData"/> -->
 
@@ -40,6 +44,7 @@
 
 <script>
 import API from '@/utils/api'
+import CreateModal from '@/components/modals/CreateModal.vue'
 import DeleteModal from '@/components/modals/DeleteModal.vue'
 
 const conf = {
@@ -77,6 +82,7 @@ export default {
     }
   },
   components: {
+    CreateModal,
     DeleteModal,
   },
   methods: {

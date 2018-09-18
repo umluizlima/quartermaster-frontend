@@ -60,4 +60,7 @@ export default {
 </script>
 
 <style lang="css">
+#deleteModal * {
+  text-align: left;
+}
 </style>

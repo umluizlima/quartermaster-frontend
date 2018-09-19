@@ -3,51 +3,50 @@
            ref="deleteModal"
            centered
            title="Apagar"
-           ok-title="Confirmar"
-           ok-variant="danger"
-           cancel-title="Cancelar"
-           hide-header-close
-           no-close-on-backdrop
-           @ok.prevent="handleOk">
+           hide-footer
+           no-close-on-backdrop>
     <b-alert variant="danger"
              dismissible
-             :show="showAlert"
-             @dismissed="showAlert=false">
-      {{ this.message }}
+             :show="alert.show"
+             @dismissed="alert.show=false">
+      {{ this.alert.message }}
     </b-alert>
     <p>Tem certeza?</p>
+    <b-btn variant="danger" @click="handleOk">Confirmar</b-btn>
   </b-modal>
 </template>
 
 <script>
+import API from '@/utils/api'
+
 export default {
   name: 'DeleteModal',
   props: {
-    id: {
-      type: Number,
+    resource: {
+      type: String,
       required: true
     },
-    api: {
-      type: Object,
+    id: {
+      type: Number,
       required: true
     }
   },
   data () {
     return {
-      showAlert: false,
-      message: null
+      api: new API(this.resource),
+      alert: {
+        show: false,
+        message: null
+      }
     }
   },
   methods: {
-    onClick () {
-      console.log(`Clicou no delete do id ${this.id}`)
-    },
     handleOk () {
       this.api.del(this.id)
       .catch((err) => {
         if (err.response.status === 404) {
-          this.message = err.response.data.message
-          this.showAlert = true
+          this.alert.message = err.response.data.message
+          this.alert.show = true
         }
       })
       .then(() => {

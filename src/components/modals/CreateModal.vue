@@ -3,58 +3,71 @@
            ref="createModal"
            centered
            title="Adicionar"
-           ok-title="Confirmar"
-           ok-variant="success"
-           cancel-title="Cancelar"
-           hide-header-close
-           no-close-on-backdrop
-           @ok.prevent="handleOk">
+           hide-footer
+           no-close-on-backdrop>
            <b-alert variant="danger"
                     dismissible
-                    :show="showAlert"
-                    @dismissed="showAlert=false">
-              {{ this.message }}
+                    :show="alert.show"
+                    @dismissed="alert.show=false">
+              {{ this.alert.message }}
             </b-alert>
-            Some Form Here!
-           <CategoryForm v-if="api.resource=='/categories'" :obj="data"/>
+           <CategoryForm v-if="resource=='/categories'"
+                         :alert="this.alert"
+                         @submitted="handleOk"/>
+           <ItemForm v-else-if="resource=='/items'"
+                     :alert="this.alert"
+                     @submitted="handleOk"/>
+           <UserForm v-else-if="resource=='/users'"
+                     :alert="this.alert"
+                     @submitted="handleOk"/>
+           <ThirdpartyForm v-else-if="resource=='/thirdparties'"
+                     :alert="this.alert"
+                     @submitted="handleOk"/>
+           <LendingForm v-else-if="resource=='/lendings'"
+                     :alert="this.alert"
+                     @submitted="handleOk"/>
+           <ReservationForm v-else-if="resource=='/reservations'"
+                     :alert="this.alert"
+                     @submitted="handleOk"/>
   </b-modal>
 </template>
 
 <script>
 import CategoryForm from '@/components/forms/CategoryForm.vue'
+import ItemForm from '@/components/forms/ItemForm.vue'
+import UserForm from '@/components/forms/UserForm.vue'
+import ThirdpartyForm from '@/components/forms/ThirdpartyForm.vue'
+import LendingForm from '@/components/forms/LendingForm.vue'
+import ReservationForm from '@/components/forms/ReservationForm.vue'
 
 export default {
   name: 'CreateModal',
   props: {
-    api: {
-      type: Object,
+    resource: {
+      type: String,
       required: true
     }
   },
   data () {
     return {
-      showAlert: false,
-      message: null,
-      data: {}
+      alert: {
+        show: false,
+        message: null
+      }
     }
   },
   components: {
-    CategoryForm
+    CategoryForm,
+    ItemForm,
+    UserForm,
+    ThirdpartyForm,
+    LendingForm,
+    ReservationForm
   },
   methods: {
     handleOk () {
-      this.api.create(this.data)
-      .then(() => {
-        this.$emit('ok')
-        this.data = {}
-        this.$refs.createModal.hide()
-      })
-      .catch((err) => {
-        if (err.response.status === 400) {
-          this.message = err.response.data.message
-          this.showAlert = true
-        }
-      })
+      this.$emit('ok')
+      this.$refs.createModal.hide()
     }
   }
 }

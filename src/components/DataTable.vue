@@ -4,9 +4,6 @@
       <b-btn slot="beforeTable"
              variant="success"
              v-b-modal.createModal>Adicionar</b-btn>
-      <!-- <b-btn v-b-modal.createModal
-             slot="beforeTable"
-             variant="success">Adicionar</b-btn> -->
 
       <div v-for="b in bools" :slot="b.column" slot-scope="props">
         <p v-if="props.row[b.column]">{{ b.isTrue }}</p>
@@ -14,30 +11,25 @@
       </div>
 
       <b-btn-group slot="actions" slot-scope="props">
-        <!-- <b-btn variant="warning" @click="editObject(props.row.id)">Editar {{ props.row.id }}</b-btn> -->
+        <b-btn v-b-modal.editModal
+               variant="warning"
+               @click="objectId = props.row.id">Editar</b-btn>
+
         <b-btn variant="danger"
                v-b-modal.deleteModal
                @click="objectId = props.row.id">Apagar</b-btn>
-        <!-- <DeleteModal :id="props.row.id" :api="api"/> -->
-        <!-- <b-btn v-b-modal.updateModal
-               variant="warning"
-               @click.prevent="objectId = props.row.id">Editar</b-btn>
-
-        <b-btn v-b-modal.deleteModal
-               variant="danger"
-               @click.prevent="objectId = props.row.id">Apagar</b-btn> -->
       </b-btn-group>
     </v-client-table>
 
-    <CreateModal :api="api"
+    <CreateModal :resource="api.resource"
                  @ok="getData"/>
 
-    <!-- <UpdateModal :id="objectId"
-                 :api="api"
-                 @ok="getData"/> -->
+    <EditModal :resource="api.resource"
+               :id="objectId"
+               @ok="getData"/>
 
-    <DeleteModal :id="objectId"
-                 :api="api"
+    <DeleteModal :resource="api.resource"
+                 :id="objectId"
                  @ok="getData"/>
   </div>
 </template>
@@ -45,6 +37,7 @@
 <script>
 import API from '@/utils/api'
 import CreateModal from '@/components/modals/CreateModal.vue'
+import EditModal from '@/components/modals/EditModal.vue'
 import DeleteModal from '@/components/modals/DeleteModal.vue'
 
 const conf = {
@@ -83,7 +76,8 @@ export default {
   },
   components: {
     CreateModal,
-    DeleteModal,
+    EditModal,
+    DeleteModal
   },
   methods: {
     getData () {

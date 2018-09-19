@@ -43,16 +43,16 @@ export default {
   methods: {
     handleOk () {
       this.api.del(this.id)
-      .catch((err) => {
-        if (err.response.status === 404) {
-          this.alert.message = err.response.data.message
-          this.alert.show = true
-        }
-      })
-      .then(() => {
-        this.$emit('ok')
-        this.$refs.deleteModal.hide()
-      })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.alert.message = err.response.data.message
+            this.alert.show = true
+          }
+        })
+        .then(() => {
+          this.$emit('ok')
+          this.$refs.deleteModal.hide()
+        })
     }
   }
 }

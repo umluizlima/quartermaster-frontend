@@ -64,7 +64,7 @@ export default {
   name: 'LendingForm',
   props: {
     objectId: {
-      type:Number,
+      type: Number,
       required: false
     },
     alert: {
@@ -90,15 +90,15 @@ export default {
   watch: {
     objectId: function () {
       this.api.getOne(this.objectId)
-      .then((resp) => {
-        this.form = resp.data
-      })
-      .catch((err) => {
-        if (err.response.status === 404) {
-          this.alert.message = err.response.data.message
-          this.alert.show = true
-        }
-      })
+        .then((resp) => {
+          this.form = resp.data
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.alert.message = err.response.data.message
+            this.alert.show = true
+          }
+        })
     }
   },
   methods: {
@@ -125,64 +125,64 @@ export default {
     getUsers () {
       let foreignApi = new API('/users')
       foreignApi.get()
-      .then((resp) => {
-        for (let user of resp.data) {
-          this.users.push({
-            value: user.id,
-            text: `${user.first_name} ${user.last_name}`
-          })
-        }
-      })
+        .then((resp) => {
+          for (let user of resp.data) {
+            this.users.push({
+              value: user.id,
+              text: `${user.first_name} ${user.last_name}`
+            })
+          }
+        })
     },
     getThirdparties () {
       let foreignApi = new API('/thirdparties')
       foreignApi.get()
-      .then((resp) => {
-        for (let thirdparty of resp.data) {
-          this.thirdparties.push({
-            value: thirdparty.id,
-            text: `${thirdparty.first_name} ${thirdparty.last_name}`
-          })
-        }
-      })
+        .then((resp) => {
+          for (let thirdparty of resp.data) {
+            this.thirdparties.push({
+              value: thirdparty.id,
+              text: `${thirdparty.first_name} ${thirdparty.last_name}`
+            })
+          }
+        })
     },
     getItems () {
       let foreignApi = new API('/items')
       foreignApi.get()
-      .then((resp) => {
-        for (let item of resp.data) {
-          this.items.push({
-            value: item.id,
-            text: item.name
-          })
-        }
-      })
+        .then((resp) => {
+          for (let item of resp.data) {
+            this.items.push({
+              value: item.id,
+              text: item.name
+            })
+          }
+        })
     },
     handleSubmit () {
       if (this.objectId) {
         this.api.update(this.objectId, this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       } else {
         this.api.create(this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       }
     }
   }

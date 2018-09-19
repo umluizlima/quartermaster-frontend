@@ -93,15 +93,15 @@ export default {
   watch: {
     objectId: function () {
       this.api.getOne(this.objectId)
-      .then((resp) => {
-        this.form = resp.data
-      })
-      .catch((err) => {
-        if (err.response.status === 404) {
-          this.alert.message = err.response.data.message
-          this.alert.show = true
-        }
-      })
+        .then((resp) => {
+          this.form = resp.data
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.alert.message = err.response.data.message
+            this.alert.show = true
+          }
+        })
     }
   },
   methods: {
@@ -128,28 +128,28 @@ export default {
     handleSubmit () {
       if (this.objectId) {
         this.api.update(this.objectId, this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       } else {
         this.api.create(this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       }
     }
   }

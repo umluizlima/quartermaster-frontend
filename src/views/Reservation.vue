@@ -24,7 +24,7 @@ export default {
           }
         },
         foreign_keys: [
-        {
+          {
             column: 'user_id',
             endpoint: '/users',
             attribute: 'email'

@@ -54,7 +54,7 @@ export default {
   name: 'ItemForm',
   props: {
     objectId: {
-      type:Number,
+      type: Number,
       required: false
     },
     alert: {
@@ -71,7 +71,7 @@ export default {
         { text: 'Indisponível', value: false }
       ],
       categories: [
-        {value: null, text: ''}
+        { value: null, text: '' }
       ]
     }
   },
@@ -82,15 +82,15 @@ export default {
   watch: {
     objectId: function () {
       this.api.getOne(this.objectId)
-      .then((resp) => {
-        this.form = resp.data
-      })
-      .catch((err) => {
-        if (err.response.status === 404) {
-          this.alert.message = err.response.data.message
-          this.alert.show = true
-        }
-      })
+        .then((resp) => {
+          this.form = resp.data
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.alert.message = err.response.data.message
+            this.alert.show = true
+          }
+        })
     }
   },
   methods: {
@@ -115,40 +115,40 @@ export default {
     getCategories () {
       let foreignApi = new API('/categories')
       foreignApi.get()
-      .then((resp) => {
-        for (let category of resp.data) {
-          this.categories.push({
-            value: category.id,
-            text: category.name
-          })
-        }
-      })
+        .then((resp) => {
+          for (let category of resp.data) {
+            this.categories.push({
+              value: category.id,
+              text: category.name
+            })
+          }
+        })
     },
     handleSubmit () {
       if (this.objectId) {
         this.api.update(this.objectId, this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       } else {
         this.api.create(this.getObj())
-        .then(() => {
-          this.clearForm()
-          this.$emit('submitted')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+          .then(() => {
+            this.clearForm()
+            this.$emit('submitted')
+          })
+          .catch((err) => {
+            if (err.response.status === 400) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
       }
     }
   }

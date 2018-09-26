@@ -87,6 +87,7 @@ export default {
           this.getForeignData(resp.data, this.config.foreign_keys)
           this.data = resp.data
         })
+      this.objectId = 0
     },
     getForeignData (data = [], foreignKeys = []) {
       for (let key of foreignKeys) {

@@ -89,16 +89,18 @@ export default {
   },
   watch: {
     objectId: function () {
-      this.api.getOne(this.objectId)
-        .then((resp) => {
-          this.form = resp.data
-        })
-        .catch((err) => {
-          if (err.response.status === 404) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
+      if (this.objectId != 0) {
+        this.api.getOne(this.objectId)
+          .then((resp) => {
+            this.form = resp.data
+          })
+          .catch((err) => {
+            if (err.response.status === 404) {
+              this.alert.message = err.response.data.message
+              this.alert.show = true
+            }
+          })
+      }
     }
   },
   methods: {

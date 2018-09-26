@@ -34,6 +34,8 @@
                   label-for="adminInput">
       <b-form-radio-group id="adminInput"
                           v-model="form.admin"
+                          buttons
+                          button-variant="outline-primary"
                           :options="admin"
                           required/>
     </b-form-group>
@@ -112,7 +114,7 @@ export default {
         first_name: null,
         last_name: null,
         email: null,
-        admin: false,
+        admin: null,
         password: null,
         confirm: null
       }

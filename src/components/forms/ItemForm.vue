@@ -32,7 +32,10 @@
                   label-for="statusInput">
       <b-form-radio-group id="statusInput"
                           v-model="form.available"
-                          :options="status"/>
+                          buttons
+                          button-variant="outline-primary"
+                          :options="status"
+                          required/>
     </b-form-group>
 
     <b-form-group id="registryInputGroup"
@@ -92,7 +95,7 @@ export default {
               this.alert.show = true
             }
           })
-      }      
+      }
     }
   },
   methods: {

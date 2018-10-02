@@ -34,6 +34,9 @@ export default {
             endpoint: '/thirdparties',
             attribute: 'email'
           }
+        ],
+        datetimes: [
+          'date_start', 'date_end'
         ]
       }
     }

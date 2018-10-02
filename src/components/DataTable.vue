@@ -10,6 +10,10 @@
         <p v-else>{{ b.isFalse }}</p>
       </div>
 
+      <div v-for="dt in datetimes" :slot="dt" slot-scope="props">
+        <p v-if="props.row[dt] != null">{{ moment(props.row[dt]).locale('pt-BR').format("DD/MM/YY - HH:mm") }}</p>
+      </div>
+
       <b-btn-group slot="actions" slot-scope="props">
         <b-btn v-b-modal.editModal
                variant="warning"
@@ -61,6 +65,7 @@ export default {
       options: {},
       columns: [],
       bools: this.config.bools || [],
+      datetimes: this.config.datetimes || [],
       objectId: 0
     }
   },

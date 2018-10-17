@@ -10,7 +10,7 @@ export default class API {
     this.resource = resource
   }
   async execute (method, resource, data) {
-    let accessToken = 'a-senha-mais-secreta-de-todas'
+    let accessToken = localStorage.getItem('token') || ''
     return client({
       method,
       url: resource,
@@ -43,7 +43,6 @@ export default class API {
     return this.execute('post', '/login', data)
   }
   logout () {
-    this.execute('get', '/logout')
-    localStorage.removeItem('user-token')
+    return this.execute('get', '/logout')
   }
 }

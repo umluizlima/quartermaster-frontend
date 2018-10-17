@@ -1,37 +1,76 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/categorias">Categorias</router-link> |
-      <router-link to="/itens">Itens</router-link> |
-      <router-link to="/terceiros">Terceiros</router-link> |
-      <router-link to="/usuarios">Usuários</router-link> |
-      <router-link to="/emprestimos">Empréstimos</router-link> |
-      <router-link to="/reservas">Reservas</router-link>
-    </div>
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-brand to="/">CDG Hub</b-navbar-brand>
+      <b-collapse is-nav id="nav_collapse">
+        <b-navbar-nav v-if="$store.getters.isLoggedIn">
+          <!-- <b-nav-item to="/">Início</b-nav-item> -->
+          <b-nav-item to="/categorias">Categorias</b-nav-item>
+          <b-nav-item to="/itens">Itens</b-nav-item>
+          <b-nav-item to="/terceiros">Terceiros</b-nav-item>
+          <b-nav-item to="/emprestimos">Empréstimos</b-nav-item>
+          <b-nav-item to="/reservas">Reservas</b-nav-item>
+          <b-nav-item v-if="$store.getters.isAdmin" to="/usuarios">Usuários</b-nav-item>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown v-if="$store.getters.isLoggedIn" right>
+            <!-- Using button-content slot -->
+            <template slot="button-content">
+              <em>{{ $store.getters.user.first_name }}</em>
+            </template>
+            <b-dropdown-item href="#">Configurações</b-dropdown-item>
+            <b-dropdown-item @click="$store.dispatch('logout')">Sair</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-navbar-nav v-else>
+            <b-nav-item to="/entrar">Entrar</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <router-view/>
   </div>
 </template>
 
 <style>
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  width: 100%;
+  /* min-height: 100vh; */
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+  /* text-align: center; */
+  /* color: #2c3e50; */
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.navbar {
+  width: 100%;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.navbar + * {
+  width: 100%;
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 800px) {
+  .navbar + * {
+    max-width: 80%;
+  }
 }
 </style>

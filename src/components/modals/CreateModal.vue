@@ -5,12 +5,13 @@
            title="Adicionar"
            hide-footer
            no-close-on-backdrop>
-           <b-alert variant="danger"
+           <!-- <b-alert variant="danger"
                     dismissible
                     :show="alert.show"
                     @dismissed="alert.show=false">
               {{ this.alert.message }}
-            </b-alert>
+            </b-alert> -->
+           <custom-alert/>
            <CategoryForm v-if="resource=='/categories'"
                          :alert="this.alert"
                          @submitted="handleOk"/>

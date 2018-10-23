@@ -20,7 +20,7 @@
     </b-form-group>
 
     <b-form-group id="dateStartInputGroup"
-                  label="Data de retirada:"
+                  label="Início:"
                   label-for="dateStartInput">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
@@ -29,7 +29,7 @@
     </b-form-group>
 
     <b-form-group id="dateEndInputGroup"
-                  label="Data de retorno:"
+                  label="Fim:"
                   label-for="dateEndInput">
       <b-form-input id="dateEndInput"
                     type="datetime-local"

@@ -32,10 +32,6 @@ export default {
     objectId: {
       type: Number,
       required: false
-    },
-    alert: {
-      type: Object,
-      required: true
     }
   },
   data () {
@@ -56,8 +52,7 @@ export default {
           })
           .catch((err) => {
             if (err.response.status === 404) {
-              this.alert.message = err.response.data.message
-              this.alert.show = true
+              this.$store.commit('setError', err.response.data.message)
             }
           })
       }
@@ -85,8 +80,7 @@ export default {
           })
           .catch((err) => {
             if (err.response.status === 400) {
-              this.alert.message = err.response.data.message
-              this.alert.show = true
+              this.$store.commit('setError', err.response.data.message)
             }
           })
       } else {
@@ -97,8 +91,7 @@ export default {
           })
           .catch((err) => {
             if (err.response.status === 400) {
-              this.alert.message = err.response.data.message
-              this.alert.show = true
+              this.$store.commit('setError', err.response.data.message)
             }
           })
       }

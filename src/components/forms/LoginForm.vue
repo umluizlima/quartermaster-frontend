@@ -32,11 +32,7 @@ export default {
   data () {
     return {
       api: new API('/users'),
-      form: {},
-      alert: {
-        show: false,
-        message: null
-      }
+      form: {}
     }
   },
   mounted () {

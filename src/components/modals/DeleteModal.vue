@@ -3,14 +3,10 @@
            ref="deleteModal"
            centered
            title="Apagar"
+           @hide="$store.commit('clearError')"
            hide-footer
            no-close-on-backdrop>
-    <b-alert variant="danger"
-             dismissible
-             :show="alert.show"
-             @dismissed="alert.show=false">
-      {{ this.alert.message }}
-    </b-alert>
+    <custom-alert/>
     <p>Tem certeza?</p>
     <b-btn variant="danger" @click="handleOk">Confirmar</b-btn>
   </b-modal>

@@ -22,7 +22,7 @@
               <em>{{ $store.getters.user.first_name }}</em>
             </template>
             <b-dropdown-item href="#">Configurações</b-dropdown-item>
-            <b-dropdown-item @click="$store.dispatch('logout')">Sair</b-dropdown-item>
+            <b-dropdown-item to="/sair">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-navbar-nav v-else>
             <b-nav-item to="/entrar">Entrar</b-nav-item>

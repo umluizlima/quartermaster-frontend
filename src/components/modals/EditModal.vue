@@ -6,41 +6,14 @@
            @hide="$store.commit('clearError')"
            hide-footer
            no-close-on-backdrop>
-           <custom-alert/>
-           <CategoryForm v-if="resource=='/categories'"
-                         :objectId="id"
-                         :alert="this.alert"
-                         @submitted="handleOk"/>
-           <ItemForm v-else-if="resource=='/items'"
-                     :objectId="id"
-                     :alert="this.alert"
-                     @submitted="handleOk"/>
-           <UserForm v-else-if="resource=='/users'"
-                     :objectId="id"
-                     :alert="this.alert"
-                     @submitted="handleOk"/>
-           <ThirdpartyForm v-else-if="resource=='/thirdparties'"
-                     :objectId="id"
-                     :alert="this.alert"
-                     @submitted="handleOk"/>
-           <LendingForm v-else-if="resource=='/lendings'"
-                     :objectId="id"
-                     :alert="this.alert"
-                     @submitted="handleOk"/>
-           <ReservationForm v-else-if="resource=='/reservations'"
-                     :objectId="id"
-                     :alert="this.alert"
-                     @submitted="handleOk"/>
+    <custom-alert/>
+    <CustomForm :resource="resource" :objectId="id" @submitted="editResource"/>
   </b-modal>
 </template>
 
 <script>
-import CategoryForm from '@/components/forms/CategoryForm.vue'
-import ItemForm from '@/components/forms/ItemForm.vue'
-import UserForm from '@/components/forms/UserForm.vue'
-import ThirdpartyForm from '@/components/forms/ThirdpartyForm.vue'
-import LendingForm from '@/components/forms/LendingForm.vue'
-import ReservationForm from '@/components/forms/ReservationForm.vue'
+import API from '@/utils/api'
+import CustomForm from '@/components/forms/CustomForm.vue'
 
 export default {
   name: 'EditModal',
@@ -56,24 +29,24 @@ export default {
   },
   data () {
     return {
-      alert: {
-        show: false,
-        message: null
-      }
+      api: new API(this.resource)
     }
   },
   components: {
-    CategoryForm,
-    ItemForm,
-    UserForm,
-    ThirdpartyForm,
-    LendingForm,
-    ReservationForm
+    CustomForm
   },
   methods: {
-    handleOk () {
-      this.$emit('ok')
-      this.$refs.editModal.hide()
+    editResource (data) {
+      this.api.update(this.id, data)
+        .then(() => {
+          this.$emit('ok')
+          this.$refs.editModal.hide()
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            this.$store.commit('setError', err.response.data.message)
+          }
+        })
     }
   }
 }

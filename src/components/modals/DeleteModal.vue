@@ -8,7 +8,7 @@
            no-close-on-backdrop>
     <custom-alert/>
     <p>Tem certeza?</p>
-    <b-btn variant="danger" @click="handleOk">Confirmar</b-btn>
+    <b-btn variant="danger" @click="deleteResource">Confirmar</b-btn>
   </b-modal>
 </template>
 
@@ -29,25 +29,20 @@ export default {
   },
   data () {
     return {
-      api: new API(this.resource),
-      alert: {
-        show: false,
-        message: null
-      }
+      api: new API(this.resource)
     }
   },
   methods: {
-    handleOk () {
+    deleteResource () {
       this.api.del(this.id)
-        .catch((err) => {
-          if (err.response.status === 404) {
-            this.alert.message = err.response.data.message
-            this.alert.show = true
-          }
-        })
         .then(() => {
           this.$emit('ok')
           this.$refs.deleteModal.hide()
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.$store.commit('setError', err.response.data.message)
+          }
         })
     }
   }

@@ -42,7 +42,15 @@ export default {
         ],
         datetimes: [
           'date_start', 'date_end', 'date_return'
-        ]
+        ],
+        history: {
+          show: true,
+          status: false,
+          options: [
+            { text: 'Em aberto', value: false },
+            { text: 'Todos', value: true }
+          ]
+        }
       }
     }
   }

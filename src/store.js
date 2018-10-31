@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from './router'
 import API from '@/utils/api'
 
 Vue.use(Vuex)
@@ -45,32 +44,15 @@ export default new Vuex.Store({
   },
   actions: {
     login (context, data) {
-      api.login(data)
-        .then((resp) => {
-          localStorage.setItem('token', resp.data.token)
-          localStorage.setItem('id', resp.data.id)
-          context.commit('login')
-          context.dispatch('validate')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            console.log('Deu erro')
-            context.commit('setError', err.response.data.message)
-          }
-        })
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('id', data.id)
+      context.commit('login')
+      context.dispatch('validate')
     },
     logout (context) {
-      api.logout()
-        .then((resp) => {
-          localStorage.removeItem('token')
-          localStorage.removeItem('id')
-          context.commit('logout')
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            context.commit('setError', err.response.data.message)
-          }
-        })
+      localStorage.removeItem('token')
+      localStorage.removeItem('id')
+      context.commit('logout')
     },
     validate (context) {
       let id = localStorage.getItem('id')

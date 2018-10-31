@@ -38,31 +38,11 @@
                           required/>
     </b-form-group>
 
-    <!-- <b-form-group v-if="!objectId"
-                  id="passwordInputGroup"
-                  label="Senha:"
-                  label-for="passwordInput">
-      <b-form-input id="passwordInput"
-                    type="password"
-                    v-model="obj.password"
-                    required></b-form-input>
-    </b-form-group>
-
-    <b-form-group v-if="!objectId"
-                  id="confirmInputGroup"
-                  label="Repita a senha:"
-                  label-for="confirmInput">
-      <b-form-input id="confirmInput"
-                    type="password"
-                    v-model="obj.confirm"
-                    required></b-form-input>
-    </b-form-group> -->
+    <p> Novos usuários são criados com a senha padrão 'abcdef'</p>
   </div>
 </template>
 
 <script>
-import API from '@/utils/api'
-
 export default {
   name: 'UserFields',
   props: {

@@ -20,7 +20,14 @@ export default {
 
 <style lang="css">
 .card {
-  width: 50%;
+  width: 90%;
+  padding: 10pt;
+}
+
+@media screen and (min-width: 800px) {
+  .card {
+    max-width: 80%;
+  }
 }
 
 .card > * {

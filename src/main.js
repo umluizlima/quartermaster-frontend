@@ -6,15 +6,16 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-Vue.use(BootstrapVue)
 
 import { ClientTable } from 'vue-tables-2'
-Vue.use(ClientTable)
 
 import CustomAlert from '@/components/CustomAlert.vue'
-Vue.component('custom-alert', CustomAlert)
 
 import moment from 'moment'
+import './registerServiceWorker'
+Vue.use(BootstrapVue)
+Vue.use(ClientTable)
+Vue.component('custom-alert', CustomAlert)
 Vue.prototype.moment = moment
 
 store.dispatch('validate')

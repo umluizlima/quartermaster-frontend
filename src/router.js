@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -11,15 +10,7 @@ let router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/Home.vue')
     },
     {
       path: '/categorias',
@@ -50,7 +41,8 @@ let router = new Router({
       name: 'user',
       component: () => import('./views/User.vue'),
       meta: {
-        requiresAdmin: true
+        requiresAuth: true,
+        isAdmin: true
       }
     },
     {
@@ -74,46 +66,55 @@ let router = new Router({
       name: 'login',
       component: () => import('./views/Login.vue'),
       meta: {
-        requiresAuth: false
+        guest: true
+      }
+    },
+    {
+      path: '/sair',
+      name: 'logout',
+      component: () => import('./views/Logout.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/conta',
+      name: 'account',
+      component: () => import('./views/Account.vue'),
+      meta: {
+        requiresAuth: true
       }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth === false)) {
-    if (store.getters.isLoggedIn === true) {
-      next('/')
-      return
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLoggedIn) {
+      next({
+        path: '/entrar',
+        params: { nextUrl: to.fullPath }
+      })
     } else {
-      next()
-      return
-    }
-  }
-  if(to.matched.some(record => record.meta.requiresAuth === true)) {
-    if (store.getters.isLoggedIn === true) {
-      next()
-      return
-    } else {
-      next('/entrar')
-      return
-    }
-  }
-  if(to.matched.some(record => record.meta.requiresAdmin === true)) {
-    if (store.getters.isLoggedIn === true) {
-      if (store.getters.isAdmin === true) {
-        next()
-        return
+      if (to.matched.some(record => record.meta.isAdmin)) {
+        if (store.getters.isAdmin) {
+          next()
+        } else {
+          next({ name: 'home' })
+        }
       } else {
-        next('/')
-        return
+        next()
       }
-    } else {
-      next('/entrar')
-      return
     }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (!store.getters.isLoggedIn) {
+      next()
+    } else {
+      next({ path: '/' })
+    }
+  } else {
+    next()
   }
-  next()
 })
 
 export default router

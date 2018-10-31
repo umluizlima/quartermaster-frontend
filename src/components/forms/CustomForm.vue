@@ -18,9 +18,6 @@
     <ReservationFields v-else-if="resource=='/reservations'"
                        :obj="form"/>
 
-    <!-- <b-button v-if="objectId" type="submit" variant="warning">Confirmar</b-button> -->
-    <!-- <b-button v-else type="submit" variant="success">Confirmar</b-button> -->
-
     <b-button v-if="objectId" type="submit" variant="warning">Confirmar</b-button>
     <b-button v-else type="submit" variant="success">Confirmar</b-button>
   </b-form>
@@ -63,7 +60,7 @@ export default {
   },
   watch: {
     objectId: function () {
-      if (this.objectId != 0) {
+      if (this.objectId !== 0) {
         this.api.getOne(this.objectId)
           .then((resp) => {
             this.form = resp.data
@@ -81,7 +78,7 @@ export default {
       let data = {}
       let object = this.form
       for (var variable in object) {
-        if (object.hasOwnProperty(variable) && variable != "id") {
+        if (object.hasOwnProperty(variable) && variable !== 'id') {
           data[variable] = object[variable]
         }
       }

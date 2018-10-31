@@ -6,7 +6,6 @@ const client = axios.create({
 })
 
 export default class API {
-
   constructor (resource) {
     this.resource = resource
   }
@@ -22,7 +21,6 @@ export default class API {
         Authorization: `Bearer ${accessToken}`
       }
     })
-
   }
 
   get () {
@@ -55,5 +53,9 @@ export default class API {
 
   logout () {
     return this.execute('get', '/logout')
+  }
+
+  changePassword (data) {
+    return this.execute('put', '/changepassword', data)
   }
 }

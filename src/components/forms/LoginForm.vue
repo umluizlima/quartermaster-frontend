@@ -45,14 +45,18 @@ export default {
         password: null
       }
     },
-    getObj () {
-      return {
-        email: this.form.email,
-        password: this.form.password
-      }
-    },
     handleSubmit () {
-      this.$store.dispatch('login', this.getObj())
+      this.api.login(this.form)
+        .then((resp) => {
+          this.$store.dispatch('login', resp.data)
+          console.log(this.$route)
+          this.$router.push(this.$route.params.nextUrl || '/')
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            this.$store.commit('setError', err.response.data.message)
+          }
+        })
     }
   }
 }

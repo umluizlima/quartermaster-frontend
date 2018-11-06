@@ -47,7 +47,7 @@ export default {
           show: true,
           status: false,
           options: [
-            { text: 'Em aberto', value: false },
+            { text: 'A devolver', value: false },
             { text: 'Todos', value: true }
           ]
         }

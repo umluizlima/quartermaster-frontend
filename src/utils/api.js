@@ -5,7 +5,7 @@ const client = axios.create({
   json: true
 })
 
-export default class API {
+class requestHandler {
   constructor (resource) {
     this.resource = resource
   }
@@ -22,7 +22,9 @@ export default class API {
       }
     })
   }
+}
 
+export class API extends requestHandler {
   get () {
     return this.execute('get', this.resource)
   }
@@ -46,7 +48,9 @@ export default class API {
   del (id) {
     return this.execute('delete', `${this.resource}/${id}`)
   }
+}
 
+export class AUTH extends requestHandler {
   login (data) {
     return this.execute('post', '/login', data)
   }

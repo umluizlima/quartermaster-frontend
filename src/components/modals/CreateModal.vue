@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import API from '@/utils/api'
+import { API } from '@/utils/api'
 import CustomForm from '@/components/forms/CustomForm.vue'
 
 export default {

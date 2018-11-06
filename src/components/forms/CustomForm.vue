@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import API from '@/utils/api'
+import { API } from '@/utils/api'
 import CategoryFields from '@/components/forms/fields/CategoryFields.vue'
 import ItemFields from '@/components/forms/fields/ItemFields.vue'
 import UserFields from '@/components/forms/fields/UserFields.vue'

@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import API from '@/utils/api'
+import { API } from '@/utils/api'
 import CreateModal from '@/components/modals/CreateModal.vue'
 import EditModal from '@/components/modals/EditModal.vue'
 import DeleteModal from '@/components/modals/DeleteModal.vue'

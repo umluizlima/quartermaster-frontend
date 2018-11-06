@@ -35,7 +35,15 @@ export default {
             isTrue: 'Disponível',
             isFalse: 'Indisponível'
           }
-        ]
+        ],
+        history: {
+          show: true,
+          status: false,
+          options: [
+            { text: 'Disponíveis', value: false },
+            { text: 'Todos', value: true }
+          ]
+        }
       }
     }
   }

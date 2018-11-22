@@ -1,5 +1,23 @@
 <template lang="html">
   <div>
+    <b-form-group id="userInputGroup"
+                  label="Responsável:"
+                  label-for="userInput">
+      <b-form-select id="userInput"
+                     v-model="obj.user_id"
+                     :options="users"
+                     required/>
+    </b-form-group>
+
+    <b-form-group id="thirdpartyInputGroup"
+                  label="Tomador:"
+                  label-for="thirdpartyInput">
+      <b-form-select id="thirdpartyInput"
+                     v-model="obj.thirdparty_id"
+                     :options="thirdparties"
+                     required/>
+    </b-form-group>
+
     <b-form-group id="nameInputGroup"
                   label="Nome:"
                   label-for="nameInput">
@@ -22,6 +40,7 @@
                   label-for="dateStartInput">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
+                    :value="moment().format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_start"
                     required></b-form-input>
     </b-form-group>
@@ -31,26 +50,9 @@
                   label-for="dateEndInput">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
+                    :value="moment().add(4, 'hours').format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_end"
                     required></b-form-input>
-    </b-form-group>
-
-    <b-form-group id="userInputGroup"
-                  label="Responsável:"
-                  label-for="userInput">
-      <b-form-select id="userInput"
-                     v-model="obj.user_id"
-                     :options="users"
-                     required/>
-    </b-form-group>
-
-    <b-form-group id="thirdpartyInputGroup"
-                  label="Tomador:"
-                  label-for="thirdpartyInput">
-      <b-form-select id="thirdpartyInput"
-                     v-model="obj.thirdparty_id"
-                     :options="thirdparties"
-                     required/>
     </b-form-group>
   </div>
 </template>

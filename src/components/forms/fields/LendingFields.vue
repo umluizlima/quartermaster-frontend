@@ -1,14 +1,5 @@
 <template lang="html">
   <div>
-    <b-form-group id="itemInputGroup"
-                  label="Item:"
-                  label-for="itemInput">
-      <b-form-select id="itemInput"
-                     v-model="obj.item_id"
-                     :options="items"
-                     required/>
-    </b-form-group>
-
     <b-form-group id="userInputGroup"
                   label="Responsável:"
                   label-for="userInput">
@@ -27,34 +18,50 @@
                      required/>
     </b-form-group>
 
+    <b-form-group id="itemInputGroup"
+                  label="Item:"
+                  label-for="itemInput">
+      <b-form-select id="itemInput"
+                     v-model="obj.item_id"
+                     :options="items"
+                     required/>
+    </b-form-group>
+
     <b-form-group id="dateStartInputGroup"
-                  label="Data de retirada:"
+                  label="Retirada:"
                   label-for="dateStartInput">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
-                    v-model="obj.date_start"></b-form-input>
+                    :value="moment().format('YYYY-MM-DDTHH:mm')"
+                    v-model="obj.date_start"
+                    required></b-form-input>
     </b-form-group>
 
     <b-form-group id="dateEndInputGroup"
-                  label="Data de retorno:"
+                  label="Retorno:"
                   label-for="dateEndInput">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
-                    v-model="obj.date_end"></b-form-input>
+                    :value="moment().add(7, 'days').format('YYYY-MM-DDTHH:mm')"
+                    v-model="obj.date_end"
+                    required></b-form-input>
     </b-form-group>
 
-    <b-form-group id="dateReturnInputGroup"
+    <b-form-group v-if="obj.id"
+                  id="dateReturnInputGroup"
                   label="Entregue em:"
                   label-for="dateReturnInput">
       <b-form-input id="dateReturnInput"
                     type="datetime-local"
+                    :value="moment().format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_return"></b-form-input>
     </b-form-group>
   </div>
 </template>
 
 <script>
-import API from '@/utils/api'
+import { API } from '@/utils/api'
+import moment from 'moment'
 
 export default {
   name: 'LendingForm',

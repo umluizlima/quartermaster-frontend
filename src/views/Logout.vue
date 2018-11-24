@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { API } from '@/utils/api'
+import { AUTH } from '@/utils/api'
 
 export default {
   data () {
     return {
-      api: new API('/users')
+      api: new AUTH()
     }
   },
   mounted () {

@@ -19,9 +19,9 @@ export default {
   },
   methods: {
     logout () {
+      this.$store.dispatch('logout')
       this.api.logout()
         .then((resp) => {
-          this.$store.dispatch('logout')
           this.$router.push('/')
         })
         .catch((err) => {

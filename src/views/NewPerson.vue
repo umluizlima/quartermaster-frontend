@@ -1,5 +1,8 @@
 <template lang="html">
-  <div>
+  <div class="newPerson">
+    <h1>Cadastrar nova pessoa</h1>
+    <p>Preencha este formulário para cadastrar uma pessoa que queira pegar um item emprestado ou então reservar a sala de treinamentos.</p>
+
     <custom-alert/>
     <CustomForm :resource="api.resource" @submitted="createResource"/>
   </div>
@@ -36,7 +39,20 @@ export default {
 </script>
 
 <style lang="css">
-#createModal * {
-  text-align: left;
+.newPerson {
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .newPerson {
+    max-width: 50%;
+  }
+}
+
+.newPerson > * {
+  width: 100%;
 }
 </style>

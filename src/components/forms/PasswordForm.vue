@@ -34,13 +34,13 @@
 </template>
 
 <script>
-import { API } from '@/utils/api'
+import { AUTH } from '@/utils/api'
 
 export default {
   name: 'PasswordForm',
   data () {
     return {
-      api: new API('/users'),
+      api: new AUTH(),
       form: {}
     }
   },

@@ -10,7 +10,10 @@ let router = new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
+      component: () => import('./views/Home.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/categorias',
@@ -81,6 +84,38 @@ let router = new Router({
       path: '/conta',
       name: 'account',
       component: () => import('./views/Account.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/emprestar',
+      name: 'lend',
+      component: () => import('./views/Lend.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/devolver',
+      name: 'return',
+      component: () => import('./views/Return.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/reservar',
+      name: 'reserve',
+      component: () => import('./views/Reserve.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/cadastrar-pessoa',
+      name: 'NewPerson',
+      component: () => import('./views/NewPerson.vue'),
       meta: {
         requiresAuth: true
       }

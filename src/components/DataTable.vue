@@ -104,7 +104,6 @@ export default {
   methods: {
     getData () {
       this.data = []
-      console.log(this.history.status)
       let request = null
       if (this.history.status) {
         request = this.api.getAll()
@@ -121,7 +120,13 @@ export default {
     getForeignData (data = [], foreignKeys = []) {
       for (let key of foreignKeys) {
         var api = new API(key.endpoint)
-        api.get()
+        let request = null
+        if (key.all == true) {
+          request = api.getAll()
+        } else {
+          request = api.get()
+        }
+        request
           .then((resp) => {
             for (let row of data) {
               if (row[key.column] != undefined) {

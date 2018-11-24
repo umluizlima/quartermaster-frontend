@@ -27,7 +27,8 @@ export default {
           {
             column: 'item_id',
             endpoint: '/items',
-            attribute: 'name'
+            attribute: 'name',
+            all: true
           },
           {
             column: 'user_id',

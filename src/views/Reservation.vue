@@ -37,7 +37,15 @@ export default {
         ],
         datetimes: [
           'date_start', 'date_end'
-        ]
+        ],
+        history: {
+          show: true,
+          status: false,
+          options: [
+            { text: 'Abertas', value: false },
+            { text: 'Todas', value: true }
+          ]
+        }
       }
     }
   }

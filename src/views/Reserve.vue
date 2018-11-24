@@ -1,5 +1,7 @@
 <template lang="html">
-  <div>
+  <div class="reserve">
+    <h1>Reservar a sala de treinamentos</h1>
+    <p>Preencha este formulário para registrar um evento.</p>
     <custom-alert/>
     <CustomForm :resource="api.resource" @submitted="createResource"/>
   </div>
@@ -36,7 +38,20 @@ export default {
 </script>
 
 <style lang="css">
-#createModal * {
-  text-align: left;
+.reserve {
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .reserve {
+    max-width: 50%;
+  }
+}
+
+.reserve > * {
+  width: 100%;
 }
 </style>

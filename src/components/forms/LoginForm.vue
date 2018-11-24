@@ -49,7 +49,6 @@ export default {
       this.api.login(this.form)
         .then((resp) => {
           this.$store.dispatch('login', resp.data)
-          console.log(this.$route)
           this.$router.push(this.$route.params.nextUrl || '/')
         })
         .catch((err) => {

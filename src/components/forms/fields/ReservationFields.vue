@@ -19,7 +19,7 @@
     </b-form-group>
 
     <b-form-group id="nameInputGroup"
-                  label="Nome:"
+                  label="Evento:"
                   label-for="nameInput">
       <b-form-input id="nameInput"
                     type="text"
@@ -40,7 +40,6 @@
                   label-for="dateStartInput">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
-                    :value="moment().format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_start"
                     required></b-form-input>
     </b-form-group>
@@ -50,7 +49,6 @@
                   label-for="dateEndInput">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
-                    :value="moment().add(4, 'hours').format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_end"
                     required></b-form-input>
     </b-form-group>
@@ -59,6 +57,7 @@
 
 <script>
 import { API } from '@/utils/api'
+import moment from 'moment'
 
 export default {
   name: 'ReservationForm',
@@ -75,6 +74,15 @@ export default {
     }
   },
   mounted () {
+    if (!this.obj.user_id) {
+      this.obj.user_id = this.$store.getters.userId
+    }
+    if (!this.obj.date_start) {
+      this.obj.date_start = moment().format('YYYY-MM-DDTHH:mm')
+    }
+    if (!this.obj.date_end) {
+      this.obj.date_end = moment().add(4, 'hours').format('YYYY-MM-DDTHH:mm')
+    }
     this.getUsers()
     this.getThirdparties()
   },

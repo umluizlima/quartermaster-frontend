@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-    <router-view/>
+    <router-view class="view my-5"/>
   </div>
 </template>
 
@@ -23,13 +23,24 @@ export default {
 }
 
 #app {
+  min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.view {
+  width: 90%;
+}
+
+@media screen and (min-width: 800px) {
+  .view {
+    width: 80%;
+  }
 }
 </style>

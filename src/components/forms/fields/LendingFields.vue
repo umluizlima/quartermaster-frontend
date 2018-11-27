@@ -32,7 +32,6 @@
                   label-for="dateStartInput">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
-                    :value="moment().format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_start"
                     required></b-form-input>
     </b-form-group>
@@ -42,7 +41,6 @@
                   label-for="dateEndInput">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
-                    :value="moment().add(7, 'days').format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_end"
                     required></b-form-input>
     </b-form-group>
@@ -53,7 +51,6 @@
                   label-for="dateReturnInput">
       <b-form-input id="dateReturnInput"
                     type="datetime-local"
-                    :value="moment().format('YYYY-MM-DDTHH:mm')"
                     v-model="obj.date_return"></b-form-input>
     </b-form-group>
   </div>
@@ -79,6 +76,18 @@ export default {
     }
   },
   mounted () {
+    if (!this.obj.user_id) {
+      this.obj.user_id = this.$store.getters.userId
+    }
+    if (!this.obj.date_start) {
+      this.obj.date_start = moment().format('YYYY-MM-DDTHH:mm')
+    }
+    if (!this.obj.date_end) {
+      this.obj.date_end = moment().add(7, 'days').format('YYYY-MM-DDTHH:mm')
+    }
+    if (this.obj.date_return === null) {
+      this.obj.date_return = moment().format('YYYY-MM-DDTHH:mm')
+    }
     this.getUsers()
     this.getThirdparties()
     this.getItems()

@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <h1>Ações rápidas</h1>
-    <p>Alguém precisa reservar a sala de treinamentos, pegar ou devolver algum material?</p>
-    <h3>Já tem cadastro?</h3>
-    <b-btn to="/cadastrar-pessoa" size="lg" variant="success">Cadastrar Pessoa</b-btn>
-    <h3>Do que precisa?</h3>
-    <b-button-group size="lg" vertical v-if="$store.getters.isLoggedIn">
-      <b-btn to="/emprestar" variant="warning">Emprestar Item</b-btn>
-      <b-btn to="/devolver" variant="success">Devolver Item</b-btn>
-      <b-btn to="/reservar" variant="primary">Reservar Sala de Treinamentos</b-btn>
-    </b-button-group>
+    <h2>AÇÕES RÁPIDAS</h2>
+    <p>Atenda rapidamente alguém que precise reservar a sala de treinamentos, pegar ou devolver algum material.</p>
+    <div class="options">
+      <h3>JÁ TEM CADASTRO?</h3>
+      <b-btn to="/cadastrar-pessoa" size="lg" variant="success">CADASTRAR PESSOA</b-btn>
+      <h3>DO QUE PRECISA?</h3>
+      <b-btn to="/emprestar" size="lg" variant="warning">EMPRESTAR ITEM</b-btn>
+      <b-btn to="/devolver" size="lg" variant="success">DEVOLVER ITEM</b-btn>
+      <b-btn to="/reservar" size="lg" variant="primary">RESERVAR SALA</b-btn>
+    </div>
   </div>
 </template>
 
@@ -21,12 +21,26 @@ export default {
 
 <style lang="css">
 .home {
+  width: 90%;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  .home {
+    width: 50%;
+  }
 }
 
 .home > * {
   width: 100%;
+}
+
+.options {
+  text-align: center;
+}
+
+.options > * {
+  margin-top: 10px;
 }
 </style>

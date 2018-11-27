@@ -58,7 +58,7 @@ export default {
     handleSubmit () {
       this.api.changePassword(this.form)
         .then((resp) => {
-          this.$router.push('/')
+          this.$router.push('home')
         })
         .catch((err) => {
           if (err.response.status === 400) {

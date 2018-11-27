@@ -71,7 +71,7 @@ export default {
           api.update(id, resp.data)
             .then((resp) => {
               console.log('Update do item bem sucedido')
-              this.$router.push('/')
+              this.$router.push('home')
             })
             .catch((err) => {
               if (err.response.status === 400) {

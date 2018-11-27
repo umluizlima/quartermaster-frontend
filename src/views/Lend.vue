@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     buttonPush () {
-      this.$router.push('/')
+      this.$router.push('home')
     },
     getThirdparties () {
       let foreignApi = new API('/thirdparties')
@@ -106,7 +106,7 @@ export default {
           // Atualiza o status de disponibilidade do item
           foreignApi.update(this.form.item_id, lentItem)
             .then((resp) => {
-              this.$router.push('/')
+              this.$router.push('home')
             })
             .catch((err) => {
               if (err.response.status === 400) {

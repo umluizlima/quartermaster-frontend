@@ -22,7 +22,7 @@ export default {
       this.$store.dispatch('logout')
       this.api.logout()
         .then((resp) => {
-          this.$router.push('/')
+          this.$router.push('home')
         })
         .catch((err) => {
           if (err.response.status === 400) {

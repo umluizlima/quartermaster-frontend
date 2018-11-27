@@ -1,11 +1,13 @@
 <template lang="html">
-  <b-card title="Entrar"
-          tag="article"
-          style="max-width: 20rem;"
-          class="mb-2"
-          align="center">
-    <LoginForm/>
-  </b-card>
+  <div>
+    <b-card title="Entrar"
+            tag="article"
+            style="max-width: 20rem;"
+            class="mb-2"
+            align="center">
+      <LoginForm/>
+    </b-card>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,8 @@
 <template lang="html">
-  <DataTable endpoint='/reservations' :config='config'/>
+  <div>
+    <h2>RESERVAS</h2>
+    <DataTable endpoint='/reservations' :config='config'/>
+  </div>
 </template>
 
 <script>
@@ -12,17 +15,14 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description', 'date_start', 'date_end', 'user_id', 'thirdparty_id'],
-        options: {
-          headings: {
-            name: 'Nome',
-            description: 'Descrição',
-            date_start: 'Início',
-            date_end: 'Fim',
-            user_id: 'Usuário',
-            thirdparty_id: 'Terceiro'
-          }
-        },
+        columns: [
+          { key: 'name', label: 'Nome', sortable: true },
+          { key: 'description', label: 'Descrição' },
+          { key: 'date_start', label: 'Início', sortable: true },
+          { key: 'date_end', label: 'Fim', sortable: true },
+          { key: 'user_id', label: 'Usuário', sortable: true },
+          { key: 'thirdparty_id', label: 'Terceiro', sortable: true }
+        ],
         foreign_keys: [
           {
             column: 'user_id',

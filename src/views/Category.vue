@@ -1,5 +1,8 @@
 <template lang="html">
-  <DataTable endpoint='/categories' :config='config'/>
+  <div>
+    <h2>CATEGORIAS</h2>
+    <DataTable endpoint='/categories' :config='config'/>
+  </div>
 </template>
 
 <script>
@@ -12,13 +15,17 @@ export default {
   data () {
     return {
       config: {
-        columns: ['name', 'description'],
-        options: {
-          headings: {
-            name: 'Nome',
-            description: 'Descrição'
-          }
-        }
+        // columns: ['name', 'description'],
+        columns: [
+          { key: 'name', label: 'Nome', sortable: true },
+          { key: 'description', label: 'Descrição', sortable: true }
+        ],
+        // options: {
+        //   headings: {
+        //     name: 'Nome',
+        //     description: 'Descrição'
+        //   }
+        // }
       }
     }
   }

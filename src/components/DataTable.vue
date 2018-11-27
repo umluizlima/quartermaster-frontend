@@ -1,57 +1,107 @@
 <template lang="html">
-    <v-client-table class="datatable" :data="data" :columns="columns" :options="options">
-      <!-- Botão para adicionar novos objetos -->
-      <b-btn class="addBtn"
-             slot="beforeTable"
-             variant="success"
-             v-b-modal.createModal>Adicionar</b-btn>
+  <b-container fluid>
+    <!-- Cabeçalho -->
+    <b-row>
+      <!-- Filtragem -->
+      <b-col md="9" class="my-1">
+        <b-form-group horizontal label="Filtrar" class="mb-0">
+          <b-form-input v-model="filter" placeholder="Digite para filtrar os resultados"/>
+        </b-form-group>
+      </b-col>
+
+      <!-- Recarregar resultados -->
+      <b-col md="3" class="my-1">
+        <b-btn variant="primary" @click="getData">Recarregar</b-btn>
+      </b-col>
+    </b-row>
+
+    <b-row>
+      <b-col md="12" class="my-1">
+        <b-btn variant="success" v-b-modal.createModal>Adicionar</b-btn>
+      </b-col>
+    </b-row>
+
+    <!-- Tabela -->
+    <b-table responsive
+             show-empty
+             empty-text="Sem resultados..."
+             empty-filtered-text="Pesquisa sem resultados..."
+             :items="items"
+             :fields="fields"
+             :current-page="currentPage"
+             :per-page="perPage"
+             :filter="filter"
+             :sort-by.sync="sortBy"
+             :sort-desc.sync="sortDesc"
+             :sort-direction="sortDirection"
+             @filtered="onFiltered">
 
       <!-- Substitui valores booleanos por textos específicos -->
-      <div v-for="b in bools" :slot="b.column" slot-scope="props">
-        <p v-if="props.row[b.column]">{{ b.isTrue }}</p>
-        <p v-else>{{ b.isFalse }}</p>
-      </div>
+      <template v-for="b in bools" :slot="b.column" slot-scope="row">
+        {{ row.value?`${b.isTrue}`:`${b.isFalse}` }}
+      </template>
 
-      <!-- Formata datetimes vindos do backend em formato ISO para o formato desejado -->
-      <div v-for="dt in datetimes" :slot="dt" slot-scope="props">
-        <p v-if="props.row[dt] != null">{{ moment(props.row[dt]).locale('pt-BR').format("DD/MM/YY - HH:mm") }}</p>
-      </div>
+      <!-- Formata datetimes de formato ISO para o desejado -->
+      <template v-for="dt in datetimes" :slot="dt" slot-scope="row">
+        {{ row.value?`${moment(row.value).locale('pt-BR').format("DD/MM/YY - HH:mm")}`:'-' }}
+      </template>
 
-      <!-- Ações de editar e apagar em cada item da tabela -->
-      <b-btn-group class="actions" slot="actions" slot-scope="props">
-        <b-btn v-b-modal.editModal
-               variant="warning"
-               @click="objectId = props.row.id">Editar</b-btn>
+      <!-- Coluna de ações -->
+      <template slot="actions" slot-scope="row">
+        <b-btn-group>
+          <b-btn v-b-modal.editModal
+                 variant="warning"
+                 @click="objectId = row.item.id">Editar</b-btn>
 
-        <b-btn variant="danger"
-               v-b-modal.deleteModal
-               @click="objectId = props.row.id">Apagar</b-btn>
-      </b-btn-group>
+          <b-btn variant="danger"
+                 v-b-modal.deleteModal
+                 @click="objectId = row.item.id">Apagar</b-btn>
+        </b-btn-group>
+      </template>
+    </b-table>
+
+    <!-- Rodapé -->
+    <b-row>
+
+      <!-- Paginação -->
+      <b-col md="4" class="my-1">
+        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+      </b-col>
 
       <!-- Seletor para alternar entre itens atuais ou histórico completo, onde aplicável -->
-      <b-form-radio-group v-if="history.show"
-                          slot="afterTable"
-                          v-model="history.status"
-                          buttons
-                          button-variant="outline-primary"
-                          :options="history.options"
-                          @input="getData"
-                          required/>
+      <b-col md="4" class="my-1">
+        <b-form-radio-group v-if="history.show"
+                            v-model="history.status"
+                            buttons
+                            button-variant="outline-primary"
+                            :options="history.options"
+                            @input="getData"
+                            required/>
+      </b-col>
 
-      <!-- Modais que são mostrados quando seus respectivos botões são apertados -->
-      <div class="modals" slot="afterTable">
-        <CreateModal :resource="api.resource"
-                     @ok="getData"/>
+      <!-- Resultados por página -->
+      <b-col md="4" class="my-1">
+        <b-form-group horizontal label="Por página" class="mb-0">
+          <b-form-select :options="pageOptions" v-model="perPage" />
+        </b-form-group>
+      </b-col>
+    </b-row>
 
-        <EditModal :resource="api.resource"
-                   :id="objectId"
-                   @ok="getData"/>
+    <!-- Modal de criação -->
+    <CreateModal :resource="api.resource"
+                 @ok="getData"/>
 
-        <DeleteModal :resource="api.resource"
-                     :id="objectId"
-                     @ok="getData"/>
-      </div>
-    </v-client-table>
+    <!-- Modal de edição -->
+    <EditModal :resource="api.resource"
+               :id="objectId"
+               @ok="getData"/>
+
+    <!-- Modal de exclusão -->
+    <DeleteModal :resource="api.resource"
+                 :id="objectId"
+                 @ok="getData"/>
+
+  </b-container>
 </template>
 
 <script>
@@ -60,30 +110,27 @@ import CreateModal from '@/components/modals/CreateModal.vue'
 import EditModal from '@/components/modals/EditModal.vue'
 import DeleteModal from '@/components/modals/DeleteModal.vue'
 
-const conf = {
-  perPage: 5,
-  perPageValues: [5, 10, 25],
-  texts: {
-    count: 'De {from} até {to} dos {count} resultados|{count} resultados|1 resultado',
-    filter: '',
-    filterPlaceholder: 'Pesquisar...',
-    limit: 'Resultados por página:',
-    noResults: 'Sem resultados...'
-  }
-}
-
 export default {
   name: 'DataTable',
   data () {
     return {
       api: new API(this.endpoint),
-      data: [],
-      options: {},
-      columns: [],
+      items: [],
+      fields: this.config.columns.concat(
+        { key: 'actions', label: '' }
+      ),
+      currentPage: 1,
+      perPage: 5,
+      totalRows: 0,
+      pageOptions: [ 5, 10, 15 ],
+      sortBy: null,
+      sortDesc: false,
+      sortDirection: 'asc',
+      filter: null,
+      objectId: 0,
       bools: this.config.bools || [],
       datetimes: this.config.datetimes || [],
-      history: this.config.history || {},
-      objectId: 0
+      history: this.config.history || {}
     }
   },
   props: {
@@ -103,7 +150,7 @@ export default {
   },
   methods: {
     getData () {
-      this.data = []
+      this.items = []
       let request = null
       if (this.history.status) {
         request = this.api.getAll()
@@ -113,7 +160,8 @@ export default {
       request
         .then((resp) => {
           this.getForeignData(resp.data, this.config.foreign_keys)
-          this.data = resp.data
+          this.items = resp.data
+          this.totalRows = resp.data.length
         })
       this.objectId = 0
     },
@@ -135,29 +183,18 @@ export default {
             }
           })
       }
+    },
+    onFiltered (filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
     }
   },
   mounted () {
-    this.columns = this.config.columns.concat(['actions'])
-    this.config.options.headings.actions = ''
-    this.options = Object.assign(this.config.options, conf)
     this.getData()
   }
 }
 </script>
 
 <style lang="css">
-.datatable {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-@media screen and (min-width: 800px) {
-  .datatable {
-    max-width: 80%;
-  }
-}
 </style>

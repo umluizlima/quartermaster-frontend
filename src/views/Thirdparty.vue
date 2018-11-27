@@ -1,5 +1,8 @@
 <template lang="html">
-  <DataTable endpoint='/thirdparties' :config='config'/>
+  <div>
+    <h2>TERCEIROS</h2>
+    <DataTable endpoint='/thirdparties' :config='config'/>
+  </div>
 </template>
 
 <script>
@@ -12,14 +15,11 @@ export default {
   data () {
     return {
       config: {
-        columns: ['first_name', 'last_name', 'email'],
-        options: {
-          headings: {
-            first_name: 'Nome',
-            last_name: 'Sobrenome',
-            email: 'E-mail'
-          }
-        }
+        columns: [
+          { key: 'first_name', label: 'Nome', sortable: true },
+          { key: 'last_name', label: 'Sobrenome', sortable: true },
+          { key: 'email', label: 'E-mail', sortable: true }
+        ],
       }
     }
   }

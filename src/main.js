@@ -7,18 +7,15 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import { ClientTable } from 'vue-tables-2'
-
 import CustomAlert from '@/components/CustomAlert.vue'
 
 import moment from 'moment'
 import './registerServiceWorker'
 Vue.use(BootstrapVue)
-Vue.use(ClientTable)
 Vue.component('custom-alert', CustomAlert)
 Vue.prototype.moment = moment
 
-store.dispatch('validate')
+// store.dispatch('validate')
 
 Vue.config.productionTip = false
 

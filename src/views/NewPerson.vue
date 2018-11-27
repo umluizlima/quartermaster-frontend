@@ -26,7 +26,7 @@ export default {
     createResource (data) {
       this.api.create(data)
         .then(() => {
-          this.$router.push('home')
+          this.$router.push({ name: 'home' })
         })
         .catch((err) => {
           if (err.response.status === 400) {

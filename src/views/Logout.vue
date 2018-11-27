@@ -19,10 +19,10 @@ export default {
   },
   methods: {
     logout () {
-      this.$store.dispatch('logout')
       this.api.logout()
         .then((resp) => {
-          this.$router.push('home')
+          this.$store.dispatch('logout')
+          this.$router.push({ name: 'home' })
         })
         .catch((err) => {
           if (err.response.status === 400) {

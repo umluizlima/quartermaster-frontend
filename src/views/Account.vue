@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="accountView">
-    <h1>Conta</h1>
+    <h1>CONTA</h1>
     <h2>Alterar minha senha</h2>
     <PasswordForm/>
   </div>

@@ -15,17 +15,10 @@ export default {
   data () {
     return {
       config: {
-        // columns: ['name', 'description'],
         columns: [
           { key: 'name', label: 'Nome', sortable: true },
           { key: 'description', label: 'Descrição', sortable: true }
-        ],
-        // options: {
-        //   headings: {
-        //     name: 'Nome',
-        //     description: 'Descrição'
-        //   }
-        // }
+        ]
       }
     }
   }

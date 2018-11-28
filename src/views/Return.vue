@@ -61,16 +61,37 @@ export default {
         })
       }
     },
-    returnItem () {
-      let api = new API('/items')
-      let id = this.lendings.find(x => x.id === this.lending_id)['item_id']
-      api.getOne(id)
+    handleSubmit () {
+      let data = {}
+      let object = this.lendings.find(x => x.id === this.lending_id)
+      for (var variable in object) {
+        if (object.hasOwnProperty(variable) && variable !== 'id') {
+          data[variable] = object[variable]
+        }
+      }
+      data.date_return = moment().format('YYYY-MM-DDTHH:mm')
+
+      this.api.update(this.lending_id, data)
+        .catch((err) => {
+          if (err.response.status === 400) {
+            this.$store.commit('setError', err.response.data.message)
+          }
+        })
         .then((resp) => {
-          resp.data.available = true
-          delete resp.data.id
-          api.update(id, resp.data)
+          this.returnItem()
+        })
+    },
+    returnItem () {
+      let foreignApi = new API('/items')
+      let id = this.lendings.find(x => x.id === this.lending_id)['item_id']
+      foreignApi.getOne(id)
+        .then((resp) => {
+          let lentItem = resp.data
+          lentItem.available = true
+          delete lentItem.id
+          // Atualiza o status de disponibilidade do item
+          foreignApi.update(id, lentItem)
             .then((resp) => {
-              console.log('Update do item bem sucedido')
               this.$router.push({ name: 'home' })
             })
             .catch((err) => {
@@ -78,29 +99,6 @@ export default {
                 this.$store.commit('setError', err.response.data.message)
               }
             })
-        })
-        .catch((err) => {
-          if (err.response.status === 404) {
-            this.$store.commit('setError', err.response.data.message)
-          }
-        })
-    },
-    handleSubmit () {
-      let lending = this.lendings.find(x => x.id === this.lending_id)
-      lending.date_return = moment().format('YYYY-MM-DDTHH:mm')
-      delete lending.id
-
-      console.log(lending)
-
-      this.api.update(this.lending_id, lending)
-        .then((resp) => {
-          console.log('Update do emprestimo bem sucedido')
-          this.returnItem()
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            this.$store.commit('setError', err.response.data.message)
-          }
         })
     }
   }

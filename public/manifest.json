@@ -1,6 +1,12 @@
 {
   "name": "CDG Hub",
   "short_name": "CDG Hub",
+  "background_color": "#343a40",
+  "theme_color": "#343a40",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/entrar",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -12,11 +18,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "scope": "/",
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#343a40",
-  "theme_color": "#343a40"
+  ]
 }

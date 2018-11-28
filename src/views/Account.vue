@@ -18,14 +18,17 @@ export default {
 
 <style lang="css">
 #accountView {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  padding: 10pt;
 }
 
-#accountView > * {
+@media screen and (min-width: 800px) {
+  #accountView {
+    max-width: 50%;
+  }
+}
+
+.btn {
   width: 100%;
 }
 </style>

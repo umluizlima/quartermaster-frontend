@@ -1,12 +1,7 @@
 <template lang="html">
-  <div>
-    <b-card title="Entrar"
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-            align="center">
-      <LoginForm/>
-    </b-card>
+  <div class="login">
+    <h2>Entrar</h2>
+    <LoginForm/>
   </div>
 </template>
 
@@ -21,23 +16,15 @@ export default {
 </script>
 
 <style lang="css">
-.card {
-  width: 90%;
+.login {
+  width: 100%;
   padding: 10pt;
 }
 
 @media screen and (min-width: 800px) {
-  .card {
-    max-width: 80%;
+  .login {
+    max-width: 50%;
   }
-}
-
-.card > * {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .btn {

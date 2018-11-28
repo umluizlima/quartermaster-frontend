@@ -169,7 +169,7 @@ export default {
       for (let key of foreignKeys) {
         var api = new API(key.endpoint)
         let request = null
-        if (key.all == true) {
+        if (key.all === true) {
           request = api.getAll()
         } else {
           request = api.get()
@@ -177,7 +177,7 @@ export default {
         request
           .then((resp) => {
             for (let row of data) {
-              if (row[key.column] != undefined) {
+              if (row[key.column] !== undefined) {
                 row[key.column] = resp.data.find(x => x.id === row[key.column])[key.attribute]
               }
             }

@@ -15,8 +15,6 @@ Vue.use(BootstrapVue)
 Vue.component('custom-alert', CustomAlert)
 Vue.prototype.moment = moment
 
-// store.dispatch('validate')
-
 Vue.config.productionTip = false
 
 new Vue({

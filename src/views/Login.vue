@@ -9,8 +9,21 @@
 import LoginForm from '@/components/forms/LoginForm.vue'
 
 export default {
+  name: 'login',
   components: {
     LoginForm
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
+  watch: {
+    isLoggedIn (val) {
+      if (val) {
+        this.$router.push({ name: 'home' })
+      }
+    }
   }
 }
 </script>

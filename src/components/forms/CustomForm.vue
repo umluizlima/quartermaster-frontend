@@ -1,5 +1,7 @@
 <template lang="html">
-  <b-form @submit.prevent="handleSubmit">
+  <b-form @submit.prevent="handleSubmit"
+          @reset="clearForm">
+
     <CategoryFields v-if="resource=='/categories'"
                     :obj="form"/>
 
@@ -18,8 +20,11 @@
     <ReservationFields v-else-if="resource=='/reservations'"
                        :obj="form"/>
 
-    <b-button v-if="objectId" type="submit" variant="warning">Confirmar</b-button>
-    <b-button v-else type="submit" variant="success">Confirmar</b-button>
+    <div id="formButtons">
+      <b-button v-if="objectId" type="submit" variant="warning">Confirmar</b-button>
+      <b-button v-else type="submit" variant="success">Confirmar</b-button>
+      <b-button type="reset" variant="danger">Limpar</b-button>
+    </div>
   </b-form>
 </template>
 
@@ -97,4 +102,11 @@ export default {
 </script>
 
 <style lang="css">
+#formButtons {
+  display: flex;
+}
+
+#formButtons > button + button {
+  margin-left: 10px;
+}
 </style>

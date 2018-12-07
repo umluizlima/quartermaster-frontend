@@ -84,7 +84,11 @@ export default {
       let object = this.form
       for (var variable in object) {
         if (object.hasOwnProperty(variable) && variable !== 'id') {
-          data[variable] = object[variable]
+          if (object[variable] === '') {
+            data[variable] = null
+          } else {
+            data[variable] = object[variable]            
+          }
         }
       }
       this.$emit('submitted', data)

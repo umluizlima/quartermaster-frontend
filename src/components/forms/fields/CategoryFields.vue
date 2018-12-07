@@ -1,8 +1,9 @@
 <template lang="html">
   <div>
     <b-form-group id="nameInputGroup"
-                  label="Nome:"
-                  label-for="nameInput">
+                  label="Nome"
+                  label-for="nameInput"
+                  label-class="font-weight-bold">
       <b-form-input id="nameInput"
                     type="text"
                     v-model="obj.name"
@@ -10,8 +11,9 @@
     </b-form-group>
 
     <b-form-group id="descriptionInputGroup"
-                  label="Descrição:"
-                  label-for="descriptionInput">
+                  label="Descrição"
+                  label-for="descriptionInput"
+                  label-class="font-weight-bold">
       <b-form-input id="descriptionInput"
                     type="text"
                     v-model="obj.description"></b-form-input>

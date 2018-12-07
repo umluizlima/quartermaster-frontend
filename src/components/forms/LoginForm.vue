@@ -4,8 +4,9 @@
     <custom-alert/>
 
     <b-form-group id="emailInputGroup"
-                  label="E-mail:"
-                  label-for="emailInput">
+                  label="E-mail"
+                  label-for="emailInput"
+                  label-class="font-weight-bold">
       <b-form-input id="emailInput"
                     type="email"
                     v-model="form.email"
@@ -13,8 +14,9 @@
     </b-form-group>
 
     <b-form-group id="passwordInputGroup"
-                  label="Senha:"
-                  label-for="passwordInput">
+                  label="Senha"
+                  label-for="passwordInput"
+                  label-class="font-weight-bold">
       <b-form-input id="passwordInput"
                     type="password"
                     v-model="form.password"

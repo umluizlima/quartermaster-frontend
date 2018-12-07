@@ -1,8 +1,9 @@
 <template lang="html">
   <div>
     <b-form-group id="userInputGroup"
-                  label="Responsável:"
-                  label-for="userInput">
+                  label="Responsável"
+                  label-for="userInput"
+                  label-class="font-weight-bold">
       <b-form-select id="userInput"
                      v-model="obj.user_id"
                      :options="users"
@@ -10,8 +11,9 @@
     </b-form-group>
 
     <b-form-group id="thirdpartyInputGroup"
-                  label="Tomador:"
-                  label-for="thirdpartyInput">
+                  label="Tomador"
+                  label-for="thirdpartyInput"
+                  label-class="font-weight-bold">
       <b-form-select id="thirdpartyInput"
                      v-model="obj.thirdparty_id"
                      :options="thirdparties"
@@ -19,8 +21,9 @@
     </b-form-group>
 
     <b-form-group id="nameInputGroup"
-                  label="Evento:"
-                  label-for="nameInput">
+                  label="Evento"
+                  label-for="nameInput"
+                  label-class="font-weight-bold">
       <b-form-input id="nameInput"
                     type="text"
                     v-model="obj.name"
@@ -28,16 +31,18 @@
     </b-form-group>
 
     <b-form-group id="descriptionInputGroup"
-                  label="Descrição:"
-                  label-for="descriptionInput">
+                  label="Descrição"
+                  label-for="descriptionInput"
+                  label-class="font-weight-bold">
       <b-form-input id="descriptionInput"
                     type="text"
                     v-model="obj.description"></b-form-input>
     </b-form-group>
 
     <b-form-group id="dateStartInputGroup"
-                  label="Início:"
-                  label-for="dateStartInput">
+                  label="Início"
+                  label-for="dateStartInput"
+                  label-class="font-weight-bold">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
                     v-model="obj.date_start"
@@ -45,8 +50,9 @@
     </b-form-group>
 
     <b-form-group id="dateEndInputGroup"
-                  label="Fim:"
-                  label-for="dateEndInput">
+                  label="Fim"
+                  label-for="dateEndInput"
+                  label-class="font-weight-bold">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
                     v-model="obj.date_end"

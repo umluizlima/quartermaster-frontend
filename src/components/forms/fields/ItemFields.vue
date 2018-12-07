@@ -1,8 +1,9 @@
 <template lang="html">
   <div>
     <b-form-group id="nameInputGroup"
-                  label="Nome:"
-                  label-for="nameInput">
+                  label="Nome"
+                  label-for="nameInput"
+                  label-class="font-weight-bold">
       <b-form-input id="nameInput"
                     type="text"
                     v-model="obj.name"
@@ -10,24 +11,27 @@
     </b-form-group>
 
     <b-form-group id="descriptionInputGroup"
-                  label="Descrição:"
-                  label-for="descriptionInput">
+                  label="Descrição"
+                  label-for="descriptionInput"
+                  label-class="font-weight-bold">
       <b-form-input id="descriptionInput"
                     type="text"
                     v-model="obj.description"></b-form-input>
     </b-form-group>
 
     <b-form-group id="categoryInputGroup"
-                  label="Categoria:"
-                  label-for="categoryInput">
+                  label="Categoria"
+                  label-for="categoryInput"
+                  label-class="font-weight-bold">
       <b-form-select id="categoryInput"
                      v-model="obj.category_id"
                      :options="categories"/>
     </b-form-group>
 
     <b-form-group id="statusInputGroup"
-                  label="Status:"
-                  label-for="statusInput">
+                  label="Status"
+                  label-for="statusInput"
+                  label-class="font-weight-bold">
       <b-form-radio-group id="statusInput"
                           v-model="obj.available"
                           buttons
@@ -37,8 +41,9 @@
     </b-form-group>
 
     <b-form-group id="registryInputGroup"
-                  label="Tombo:"
-                  label-for="registryInput">
+                  label="Tombo"
+                  label-for="registryInput"
+                  label-class="font-weight-bold">
       <b-form-input id="registryInput"
                     type="number"
                     v-model="obj.registry"></b-form-input>

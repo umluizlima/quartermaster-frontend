@@ -1,8 +1,9 @@
 <template lang="html">
   <div>
     <b-form-group id="userInputGroup"
-                  label="Responsável:"
-                  label-for="userInput">
+                  label="Responsável"
+                  label-for="userInput"
+                  label-class="font-weight-bold">
       <b-form-select id="userInput"
                      v-model="obj.user_id"
                      :options="users"
@@ -10,8 +11,9 @@
     </b-form-group>
 
     <b-form-group id="thirdpartyInputGroup"
-                  label="Tomador:"
-                  label-for="thirdpartyInput">
+                  label="Tomador"
+                  label-for="thirdpartyInput"
+                  label-class="font-weight-bold">
       <b-form-select id="thirdpartyInput"
                      v-model="obj.thirdparty_id"
                      :options="thirdparties"
@@ -19,8 +21,9 @@
     </b-form-group>
 
     <b-form-group id="itemInputGroup"
-                  label="Item:"
-                  label-for="itemInput">
+                  label="Item"
+                  label-for="itemInput"
+                  label-class="font-weight-bold">
       <b-form-select id="itemInput"
                      v-model="obj.item_id"
                      :options="items"
@@ -28,8 +31,9 @@
     </b-form-group>
 
     <b-form-group id="dateStartInputGroup"
-                  label="Retirada:"
-                  label-for="dateStartInput">
+                  label="Retirada"
+                  label-for="dateStartInput"
+                  label-class="font-weight-bold">
       <b-form-input id="dateStartInput"
                     type="datetime-local"
                     v-model="obj.date_start"
@@ -37,8 +41,9 @@
     </b-form-group>
 
     <b-form-group id="dateEndInputGroup"
-                  label="Retorno:"
-                  label-for="dateEndInput">
+                  label="Retorno"
+                  label-for="dateEndInput"
+                  label-class="font-weight-bold">
       <b-form-input id="dateEndInput"
                     type="datetime-local"
                     v-model="obj.date_end"
@@ -47,8 +52,9 @@
 
     <b-form-group v-if="obj.id"
                   id="dateReturnInputGroup"
-                  label="Entregue em:"
-                  label-for="dateReturnInput">
+                  label="Entregue em"
+                  label-for="dateReturnInput"
+                  label-class="font-weight-bold">
       <b-form-input id="dateReturnInput"
                     type="datetime-local"
                     v-model="obj.date_return"></b-form-input>

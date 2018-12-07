@@ -4,8 +4,9 @@
     <custom-alert/>
 
     <b-form-group id="oldPasswordInputGroup"
-                  label="Senha atual:"
-                  label-for="oldPasswordInput">
+                  label="Senha atual"
+                  label-for="oldPasswordInput"
+                  label-class="font-weight-bold">
       <b-form-input id="oldPasswordInput"
                     type="password"
                     v-model="form.old_password"
@@ -13,8 +14,9 @@
     </b-form-group>
 
     <b-form-group id="newPasswordInputGroup"
-                  label="Nova senha:"
-                  label-for="newPasswordInput">
+                  label="Nova senha"
+                  label-for="newPasswordInput"
+                  label-class="font-weight-bold">
       <b-form-input id="newPasswordInput"
                     type="password"
                     v-model="form.new_password"
@@ -22,8 +24,9 @@
     </b-form-group>
 
     <b-form-group id="newConfirmInputGroup"
-                  label="Repita a nova senha:"
-                  label-for="newConfirmInput">
+                  label="Repita a nova senha"
+                  label-for="newConfirmInput"
+                  label-class="font-weight-bold">
       <b-form-input id="newConfirmInput"
                     type="password"
                     v-model="form.new_confirm"

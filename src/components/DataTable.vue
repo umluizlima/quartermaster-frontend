@@ -23,6 +23,8 @@
 
     <!-- Tabela -->
     <b-table responsive
+             striped
+             bordered
              show-empty
              empty-text="Sem resultados..."
              empty-filtered-text="Pesquisa sem resultados..."

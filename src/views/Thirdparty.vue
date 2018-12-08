@@ -18,7 +18,8 @@ export default {
         columns: [
           { key: 'first_name', label: 'Nome', sortable: true },
           { key: 'last_name', label: 'Sobrenome', sortable: true },
-          { key: 'email', label: 'E-mail', sortable: true }
+          { key: 'email', label: 'E-mail', sortable: true },
+          { key: 'phone', label: 'Telefone', sortable: true}
         ]
       }
     }

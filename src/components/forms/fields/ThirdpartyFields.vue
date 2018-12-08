@@ -29,6 +29,16 @@
                     v-model="obj.email"
                     required></b-form-input>
     </b-form-group>
+
+    <b-form-group id="phoneInputGroup"
+                  label="Telefone"
+                  label-for="phoneInput"
+                  label-class="font-weight-bold">
+      <b-form-input id="phoneInput"
+                    type="tel"
+                    v-model="obj.phone"
+                    required></b-form-input>
+    </b-form-group>
   </div>
 </template>
 

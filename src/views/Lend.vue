@@ -39,6 +39,7 @@ export default {
       api: new API('/lendings'),
       thirdparties: [],
       items: [],
+      categories: {},
       form: {
         item_id: null,
         user_id: this.$store.getters.userId,
@@ -50,12 +51,8 @@ export default {
   },
   mounted () {
     this.getThirdparties()
-    this.getItems()
   },
   methods: {
-    buttonPush () {
-      this.$router.push({ name: 'home' })
-    },
     getThirdparties () {
       let foreignApi = new API('/thirdparties')
       foreignApi.get()
@@ -66,18 +63,42 @@ export default {
               text: `${thirdparty.first_name} ${thirdparty.last_name} - ${thirdparty.email}`
             })
           }
+          this.getCategories()
+        })
+    },
+    getCategories () {
+      let categoryApi = new API('/categories')
+      categoryApi.get()
+        .then((resp) => {
+          for (let cat of resp.data) {
+            this.categories[cat.id] = cat.name
+          }
+          this.getItems()
         })
     },
     getItems () {
       let foreignApi = new API('/items')
       foreignApi.get()
         .then((resp) => {
+          console.log(resp.data)
           for (let item of resp.data) {
+            console.log(item.id)
+            let text = `${this.categories[item.category_id]} - ${item.name}`
+            if (item.registry != null) {
+              text += ` (${item.registry})`
+            }
             this.items.push({
               value: item.id,
-              text: `${item.name}`
+              text: text
             })
           }
+          this.items = this.items.sort((a, b) => {
+            if (a.text > b.text) {
+              return 1
+            } else {
+              return -1
+            }
+          })
         })
     },
     handleSubmit () {

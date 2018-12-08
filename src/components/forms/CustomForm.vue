@@ -23,7 +23,7 @@
     <div id="formButtons">
       <b-button v-if="objectId" type="submit" variant="warning">Confirmar</b-button>
       <b-button v-else type="submit" variant="success">Confirmar</b-button>
-      <b-button v-if="Object.keys(form) != 0"type="reset" variant="danger">Limpar</b-button>
+      <b-button v-if="Object.keys(form) != 0" type="reset" variant="danger">Limpar</b-button>
     </div>
   </b-form>
 </template>
@@ -87,7 +87,7 @@ export default {
           if (object[variable] === '') {
             data[variable] = null
           } else {
-            data[variable] = object[variable]            
+            data[variable] = object[variable]
           }
         }
       }

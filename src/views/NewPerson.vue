@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="newPerson">
     <h1>Cadastrar nova pessoa</h1>
-    <p>Preencha este formulário para cadastrar uma pessoa que queira pegar um item emprestado ou então reservar a sala de treinamentos.</p>
+    <p v-if="$store.getters.isLoggedIn">Preencha este formulário para cadastrar uma pessoa que queira pegar um item emprestado ou então reservar a sala de treinamentos.</p>
+    <p v-else>Cadastre-se para poder pegar itens emprestados ou reservar a sala de treinamentos do CDG Hub. Obs.: os empréstimos e reservas devem ser registrados pelos responsáveis do laboratório.</p>
 
     <custom-alert/>
     <CustomForm :resource="api.resource" @submitted="createResource"/>

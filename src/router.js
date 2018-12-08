@@ -118,7 +118,7 @@ let router = new Router({
       name: 'NewPerson',
       component: () => import('./views/NewPerson.vue'),
       meta: {
-        requiresAuth: true
+        // requiresAuth: true
       }
     }
   ]

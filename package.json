@@ -11,20 +11,21 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
-    "moment": "^2.22.2",
+    "moment": "^2.23.0",
     "push-dir": "^0.4.1",
     "register-service-worker": "^1.0.0",
-    "vue": "^2.5.18",
+    "vue": "^2.5.21",
     "vue-router": "^3.0.2",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack-dev-server": ">=3.1.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-plugin-pwa": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.2.2",
+    "@vue/cli-plugin-eslint": "^3.2.2",
+    "@vue/cli-plugin-pwa": "^3.2.2",
+    "@vue/cli-service": "^3.2.3",
     "@vue/eslint-config-standard": "^3.0.5",
-    "vue-template-compiler": "^2.5.18"
+    "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
     "root": true,

@@ -37,6 +37,7 @@ export default {
   align-items: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
 }
 
 .view {

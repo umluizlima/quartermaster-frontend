@@ -6,7 +6,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/ic-cdg-hub-frontend/",
-  "start_url": "/",
+  "start_url": "/ic-cdg-hub-frontend/",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",

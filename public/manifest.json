@@ -5,7 +5,7 @@
   "theme_color": "#343a40",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "/ic-cdg-hub-frontend/",
   "start_url": "/",
   "icons": [
     {

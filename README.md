@@ -1,4 +1,4 @@
-# ic-cdg-hub-frontend
+# quartermaster-frontend
 
 ## Project setup
 ```

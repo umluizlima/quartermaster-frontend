@@ -30,7 +30,7 @@ Para publicá-la em seu fork do repositório é preciso seguir as seguintes inst
 
 1. No seu editor de texto favorito, acesse o arquivo `src/utils/api.js` deste projeto e altere o campo `baseURL` de forma que aponte para sua aplicação de backend (caso não a tenha publicado no Heroku ainda, faça-o agora seguindo as instruções disponíveis no [repositório](https://github.com/umluizlima/quartermaster-backend)). Ele deve ficar na forma: `baseURL: 'https://<sua-aplicação-de-backend-no-heroku>.herokuapp.com/api/',`
 
-2. Verifique o funcionamento acessando de forma local a aplicação no endereço http://localhost:8080/quartermaster-frontend
+2. Verifique o funcionamento acessando de forma local a aplicação no endereço http://localhost:8080/quartermaster-frontend (precisa estar rodando em sua máquina `npm run serve`)
 
 3. Compile a aplicação para produção:
 

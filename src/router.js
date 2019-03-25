@@ -114,6 +114,14 @@ let router = new Router({
       }
     },
     {
+      path: '/agenda',
+      name: 'calendar',
+      component: () => import('./views/Calendar.vue'),
+      meta: {
+        // requiresAuth: true
+      }
+    },
+    {
       path: '/cadastrar-pessoa',
       name: 'NewPerson',
       component: () => import('./views/NewPerson.vue'),

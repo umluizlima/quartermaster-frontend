@@ -15,7 +15,7 @@
       </b-col>
     </b-row>
 
-    <b-row>
+    <b-row v-if="!hideCrudButtons">
       <b-col md="12" class="my-1">
         <b-btn variant="success" v-b-modal.createModal>Adicionar</b-btn>
       </b-col>
@@ -49,7 +49,7 @@
       </template>
 
       <!-- Coluna de ações -->
-      <template slot="actions" slot-scope="row">
+      <template v-if="!hideCrudButtons" slot="actions" slot-scope="row">
         <b-btn-group>
           <b-btn v-b-modal.editModal
                  variant="warning"
@@ -90,16 +90,16 @@
     </b-row>
 
     <!-- Modal de criação -->
-    <CreateModal :resource="api.resource"
+    <CreateModal v-if="!hideCrudButtons" :resource="api.resource"
                  @ok="getData"/>
 
     <!-- Modal de edição -->
-    <EditModal :resource="api.resource"
+    <EditModal v-if="!hideCrudButtons" :resource="api.resource"
                :id="objectId"
                @ok="getData"/>
 
     <!-- Modal de exclusão -->
-    <DeleteModal :resource="api.resource"
+    <DeleteModal v-if="!hideCrudButtons" :resource="api.resource"
                  :id="objectId"
                  @ok="getData"/>
 
@@ -118,9 +118,7 @@ export default {
     return {
       api: new API(this.endpoint),
       items: [],
-      fields: this.config.columns.concat(
-        { key: 'actions', label: '' }
-      ),
+      fields: this.config.columns,
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
@@ -143,6 +141,9 @@ export default {
     config: {
       type: Object,
       required: true
+    },
+    hideCrudButtons: {
+      type: Boolean
     }
   },
   components: {
@@ -193,6 +194,9 @@ export default {
     }
   },
   mounted () {
+    if (!this.hideCrudButtons) {
+      this.fields = this.fields.concat({ key: 'actions', label: '' })
+    }
     this.getData()
   }
 }

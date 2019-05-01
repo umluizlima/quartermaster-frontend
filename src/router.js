@@ -123,7 +123,7 @@ let router = new Router({
     },
     {
       path: '/cadastrar-pessoa',
-      name: 'NewPerson',
+      name: 'newPerson',
       component: () => import('./views/NewPerson.vue'),
       meta: {
         // requiresAuth: true

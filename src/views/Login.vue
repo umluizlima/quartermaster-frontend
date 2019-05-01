@@ -2,9 +2,9 @@
   <div class="login">
     <h2>Entrar</h2>
     <LoginForm/>
-    <p>Quer pegar um item emprestado ou reservar a sala de treinamentos pela primeira vez? Cadastre-se <router-link :to="{ name: 'NewPerson' }">aqui</router-link></p>
+    <p>Quer pegar um item emprestado ou reservar a sala de treinamentos pela primeira vez? Cadastre-se <router-link :to="{ name: 'newPerson' }">aqui</router-link></p>
 
-    <p>Consulte a agenda de reservas <router-link :to="{ name: 'Calendar' }">aqui</router-link></p>
+    <p>Consulte a agenda de reservas <router-link :to="{ name: 'calendar' }">aqui</router-link></p>
   </div>
 </template>
 
